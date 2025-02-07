@@ -86,7 +86,7 @@ class Auth extends BaseController
                 else
                 {
                     $this->session->set([
-                        'id'          => $userData[0]['user_third_party_code'],
+                        'id'          => $userData[0]['user_id'],
                         'name'        => $userData[0]['user_name'],
                         'group'       => $userData[0]['group_description'],
                         'permissions' => json_decode($userData[0]['group_permissions'], true),

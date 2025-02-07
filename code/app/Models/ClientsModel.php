@@ -39,9 +39,15 @@ class ClientsModel extends Model
         
     }
 
-    public function getClientInfo()
+    public function getClientInfoByCode($clientCode)
     {
-
+        $query = $this->db->table($this->table)
+                          ->select($this->table . '.*, tb_contacts.*')
+                          ->join('tb_contacts', $this->table . '.client_code = tb_contacts.contact_third_party_code', 'left')
+                          ->where($this->table . '.client_code', $clientCode)
+                          ->where('tb_contacts.contact_default', "true");
+        
+        return $query->get()->getResultArray();
     }
 
     public function insertContact($data)

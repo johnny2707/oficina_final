@@ -1,12 +1,14 @@
 <?php namespace App\Controllers;
 
 use App\Models\UsersModel;
+use App\Models\ClientsModel;
 use CodeIgniter\I18n\Time;
 
 class Users extends BaseController 
 {
     protected $session;
     protected $usersModel;
+    protected $clientsModel;
     protected $res;
     protected $data;
 
@@ -14,6 +16,9 @@ class Users extends BaseController
     {
         $this->session = \Config\Services::session();
         $this->usersModel = new UsersModel;
+        $this->clientsModel = new ClientsModel;
+
+        helper('uuid');
         
         $this->res = array(
             'error' => FALSE,
@@ -52,14 +57,46 @@ class Users extends BaseController
 
         $tokenInfo = $this->usersModel->getTokenInfo($USER_TOKEN);
 
-        if(Time('now') > $tokenInfo['token_expire_date'])
+        if(date('Y-m-d H:i:s') < $tokenInfo[0]['token_expire_date'])
         {
+            if($password === $passwordConfirmation)
+            {
+                $userID = generateUUID();
+                $clientInfo = $this->clientsModel->getClientInfoByCode($tokenInfo[0]['token_third_party_id']);
 
+                $userData = array(
+                    'user_id'                => $userID,
+                    'user_third_party_code'  => $tokenInfo[0]['token_third_party_id'],
+                    'user_name'              => $clientInfo[0]['client_name'],
+                    'user_email'             => $clientInfo[0]['contact_email'],
+                    'user_password'          => password_hash($password, PASSWORD_DEFAULT),
+                    'user_group_id'          => 2,
+                );
+
+                if($this->usersModel->createUser($userData))
+                {
+                    array_push($this->res['popUpMessages'], 'Utilizador criado com sucesso!');
+                }
+                else
+                {
+                    $this->res['error'] = true;
+                    array_push($this->res['popUpMessages'], 'Erro ao criar utilizador!');
+                }
+            }
+            else
+            {
+                $this->res['error'] = true;
+                array_push($this->res['popUpMessages'], 'As passwords não coincidem!');
+            }
         }
         else
         {
+            $this->res['popUpMessages'][] = date('Y-m-d H:i:s');
             $this->res['error'] = true;
+            $this->res['popUpMessages'][] = 'O token expirou!';
         }
+
+        return $this->response->setJSON($this->res);
     }
 
     // public function index()

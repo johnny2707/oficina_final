@@ -6472,7 +6472,7 @@ textarea.form-control-lg {
 .modal-backdrop {
   --tblr-backdrop-zindex: 1050;
   --tblr-backdrop-bg: #182433;
-  --tblr-backdrop-opacity: 0.24;
+  --tblr-backdrop-opacity: 0.5;
   position: fixed;
   top: 0;
   left: 0;

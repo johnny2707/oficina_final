@@ -151,18 +151,9 @@
             	</ul>
           	</div>
 
-			<!-- <div class="d-none d-lg-flex justify-content-center align-items-center gap-5 flex-row flex-row-auto">
-				<a href="?theme=dark" class="nav-link px-0" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
-					<i class="bi bi-moon-fill"></i>
-				</a>
-				<a href="?theme=light" class="nav-link px-0" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
-					<i class="bi bi-sun-fill"></i>
-				</a>
-			</div> -->
-
-			<div class="navbar-nav flex-row py-3">
+			<div class="navbar-nav flex-row justify-content-between py-3">
 				<div class="d-none d-lg-flex order-2">
-					<a href="<?= base_url('auth/logout') ?>" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="logout" data-bs-original-title="logout">
+					<a href="<?= base_url('auth/logout') ?>" class="nav-link px-0" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="logout" data-bs-original-title="logout">
 						<i class="bi bi-door-open-fill h1 m-0 p-0 text-primary"></i>
 					</a>
 				</div>

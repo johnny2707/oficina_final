@@ -142,10 +142,6 @@
     .navbar-vertical, .navbar-expand-lg, .navbar-nav {
         flex-grow: 0 !important;
     }
-
-    body {
-        background-color: #eaeaea;
-    }
 /* ---- CORE ---- */
 
 /* ++++ LOAD SPINNER ++++ */

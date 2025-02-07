@@ -25,7 +25,7 @@
 	<?= $customCSS ?>
 	
 </head>
-<body class="border-top-wide border-primary d-flex flex-column" style="background-color: #2f2f2f; opacity: 1; background-image:  linear-gradient(30deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(150deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(30deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(150deg, #000000 12%, transparent 12.5%, transparent 87%, #000000 87.5%, #000000), linear-gradient(60deg, #00000077 25%, transparent 25.5%, transparent 75%, #00000077 75%, #00000077), linear-gradient(60deg, #00000077 25%, transparent 25.5%, transparent 75%, #00000077 75%, #00000077); background-size: 80px 140px; background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;">
+<body class="border-top-wide border-primary d-flex flex-column custom-bg">
 	<div class="page page-center">
 		<div class="container container-tight py-4">
 			<form class="card card-md">

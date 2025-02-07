@@ -17,7 +17,14 @@ class UsersModel extends Model
 
     public function createUser($userData)
     {
-        $this->db->table('tb_users')->insert($userData);
+        if($this->db->table('tb_users')->insert($userData))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function updateUser($userId, $userData)
