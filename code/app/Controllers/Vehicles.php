@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\VehiclesModel;
+use App\Models\UsersModel;
 
 class Vehicles extends BaseController
 {
@@ -10,11 +11,13 @@ class Vehicles extends BaseController
     protected $data;
     
     protected $vehiclesModel;
+    protected $usersModel;
 
     public function __construct()
     {
         $this->session = \Config\Services::session();
         $this->vehiclesModel = new VehiclesModel;
+        $this->usersModel = new UsersModel;
 
         $this->res = [
             'error' => FALSE,
@@ -40,9 +43,10 @@ class Vehicles extends BaseController
 
     public function getUserVehicles()
     {
-        $userThirdPartyId = $this->session->get('id');
+        $userId = $this->session->get('id');
+        $userThirdPartyCode = $this->usersModel->getUserThirdPartyId($userId);
 
-        return $this->response->setJSON($this->vehiclesModel->getVehiclesByThirdPartyCode($userThirdPartyId));
+        return $this->response->setJSON($this->vehiclesModel->getVehiclesByThirdPartyCode($userThirdPartyCode[0]['user_third_party_code']));
     }
 
     public function getVehicleData()

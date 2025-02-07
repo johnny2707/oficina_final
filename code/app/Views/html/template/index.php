@@ -152,11 +152,6 @@
           	</div>
 
 			<div class="navbar-nav flex-row justify-content-between py-3">
-				<div class="d-none d-lg-flex order-2">
-					<a href="<?= base_url('auth/logout') ?>" class="nav-link px-0" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="logout" data-bs-original-title="logout">
-						<i class="bi bi-door-open-fill h1 m-0 p-0 text-primary"></i>
-					</a>
-				</div>
 				<div class="nav-item">
 					<span class="nav-link d-flex lh-1 text-reset p-0 ms-3 me-5">
 						<?php

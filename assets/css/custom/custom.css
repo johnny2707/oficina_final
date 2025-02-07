@@ -7,6 +7,10 @@
         --tblr-white: #FAFAFA !important;
     }
 
+    .btn-w1 {
+        width: 16rem !important;
+    }
+
     .custom-bg {
         background-color: #2f2f2f; 
         opacity: 1; 

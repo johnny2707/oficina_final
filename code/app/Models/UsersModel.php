@@ -27,6 +27,15 @@ class UsersModel extends Model
         }
     }
 
+    public function getUserThirdPartyId($userID) 
+    {
+        $query = $this->db->table('tb_users')
+                          ->select('user_third_party_code')
+                          ->where('user_id', $userID);
+        
+        return $query->get()->getResultArray();
+    }
+
     public function updateUser($userId, $userData)
     {
         $this->db->table('tb_users')->update($userData, ['user_id' => $userId]);
