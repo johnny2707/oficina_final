@@ -108,7 +108,7 @@
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'SCHEDULE' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="bi bi-calendar-event-fill"></i>
+								<i class="bi bi-calendar-event-fill"	></i>
 							</span>
 							<span class="nav-link-title">CALENDAR</span>
 						</a>
@@ -119,6 +119,14 @@
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'LIST' ? 'active' : '' ?>" href="<?= base_url('calendar/list') ?>">LISTA DE EVENTOS</a>
 							<?php endif; ?>
 						</div>
+					</li>
+					<li class="nav-item dropdown <?= isset($menu) && $menu == 'SERVICES' ? 'active' : '' ?>">
+						<a href="<?= base_url('services/index') ?>" class="nav-link" >
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="bi bi-file-earmark-text-fill"></i>
+							</span>
+							<span class="nav-link-title">SERVICES</span>
+						</a>
 					</li>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'FATURA' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >

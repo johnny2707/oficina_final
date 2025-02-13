@@ -74,4 +74,20 @@ class UsersModel extends Model
 
         return $query->get()->getResultArray();
     }
+
+    public function getUserEmail($userID)
+    {
+        $query = $this->db->table('tb_users')->select('user_email')
+                                             ->where('user_id', $userID);
+
+        return $query->get()->getResultArray();
+    }
+
+    public function getUserUsername($userID)
+    {
+        $query = $this->db->table('tb_users')->select('user_name')
+                                             ->where('user_id', $userID);
+
+        return $query->get()->getResultArray();
+    }
 }

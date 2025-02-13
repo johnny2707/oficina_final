@@ -59,6 +59,11 @@ $routes->group('calendar', ['filter' => 'authGuard|permissionsValidation: EVENTS
 
 //USERS
 
+$routes->group('users', ['filter' => 'authGuard|permissionsValidation: USERS, ALL'], function($routes){
+    $routes->post('changeEmail',                'Users::changeEmail');
+    $routes->post('changeUsername',             'Users::changeUsername');
+});
+
 $routes->get('users/createAccount/(:segment)',  'Users::createAccountPage/$1');
 $routes->post('users/createAccount',            'Users::createAccount');
 
@@ -77,3 +82,8 @@ $routes->post('(:hash)/activate',   'Users::activateUser/$1');
 $routes->post('(:hash)/inactivate', 'Users::inactivateUser/$1');
 
 $routes->get('clock', 'Clock::index');
+
+// SERVICES
+$routes->group('services', ['filter' => 'authGuard|permissionsValidation: SERVICES, ALL'], function($routes){
+    $routes->get('index', 'Services::index');
+});

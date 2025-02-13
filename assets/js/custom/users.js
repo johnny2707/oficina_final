@@ -48,7 +48,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('click', '.changePasswordButton', function(e){
+    $(document).on('click', '.saveNewPassword', function(e){
 
         $.ajax({
             type: "post",
@@ -71,6 +71,125 @@ $(document).ready(function () {
                     });
                     
                     window.location.href = `${baseURL}`;
+                }
+            },
+            error: function(xhr, status, error){
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+
+                notyf.error('Ocorreu um erro. Atualize a página e tente novamente!');
+            }
+        });
+    });
+
+    $(document).on('click', '.saveNewEmail', function(e){
+
+        let NewEmail = $('.saveNewEmailModalInput').val();
+        let OldEmail = $('.userEmail').val();
+
+        if(NewEmail == "") {
+            notyf.error('Introduza um email!');
+        }
+        else if(NewEmail == OldEmail) {
+            notyf.error('O email introduzido é igual ao atual!');
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: `${baseURL}users/changeEmail`,
+                data: {
+                    NewEmail
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.error == true) {
+                        $.each(data.popUpMessages, function(key, value) {
+                            notyf.error(value);
+                        });
+                    } 
+                    else {
+                        $.each(data.popUpMessages, function(key, value) {
+                            notyf.success(value);
+                        });
+                        
+                        $(".userEmail").val(NewEmail);
+                    }
+                },
+                error: function(xhr, status, error){
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+
+                    notyf.error('Ocorreu um erro. Atualize a página e tente novamente!');
+                }
+            });
+        }        
+    });
+
+    $(document).on('click', '.saveNewUsername', function(e){
+
+        let NewUsername = $('.saveNewUsernameModalInput').val();
+        let OldUsername = $('.userName').val();
+
+        if(NewUsername == "") {
+            notyf.error('Introduza um username!');
+        }
+        else if(NewUsername == OldUsername) {
+            notyf.error('O username introduzido é igual ao atual!');
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: `${baseURL}users/changeUsername`,
+                data: {
+                    NewUsername
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.error == true) {
+                        $.each(data.popUpMessages, function(key, value) {
+                            notyf.error(value);
+                        });
+                    } 
+                    else {
+                        $.each(data.popUpMessages, function(key, value) {
+                            notyf.success(value);
+                        });
+                        
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error){
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+
+                    notyf.error('Ocorreu um erro. Atualize a página e tente novamente!');
+                }
+            });
+        }        
+    });
+
+    $(document).on('click', '.deleteAccountButton', function(e){
+
+        $.ajax({
+            type: "post",
+            url: `${baseURL}users/deleteAccount`,
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                if (data.error == true) {
+                    $.each(data.popUpMessages, function(key, value) {
+                        notyf.error(value);
+                    });
+                } 
+                else {
+                    $.each(data.popUpMessages, function(key, value) {
+                        notyf.success(value);
+                    });
+                    
+                    window.location.href = `${baseURL}auth/logout`;
                 }
             },
             error: function(xhr, status, error){

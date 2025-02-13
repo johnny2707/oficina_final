@@ -99,6 +99,58 @@ class Users extends BaseController
         return $this->response->setJSON($this->res);
     }
 
+    public function changeEmail()
+    {
+        $email = $this->request->getPost('NewEmail');
+
+        $oldEmail = $this->usersModel->getUserEmail($this->session->get('id'));
+
+        if($email == "")
+        {
+            $this->res['error'] = true;
+            $this->res['popUpMessages'][] = 'O email não pode ser vazio!';
+        }
+        else if($email === $oldEmail)
+        {
+            $this->res['error'] = true;
+            $this->res['popUpMessages'][] = 'O email é igual ao atual!';
+        }
+        else
+        {
+            $this->usersModel->updateUser($this->session->get('id'), ['user_email' => $email]);
+            $this->res['popUpMessages'][] = 'Email alterado com sucesso!';
+        }
+
+        return $this->response->setJSON($this->res);
+    }
+
+    public function changeUsername()
+    {
+        $username = $this->request->getPost('NewUsername');
+
+        $oldUsername = $this->usersModel->getUserUsername($this->session->get('id'));
+
+        if($username == "")
+        {
+            $this->res['error'] = true;
+            $this->res['popUpMessages'][] = 'O username não pode ser vazio!';
+        }
+        else if($username === $oldUsername)
+        {
+            $this->res['error'] = true;
+            $this->res['popUpMessages'][] = 'O username é igual ao atual!';
+        }
+        else
+        {
+            $this->usersModel->updateUser($this->session->get('id'), ['user_name' => $username]);
+            $this->res['popUpMessages'][] = 'Username alterado com sucesso!';
+
+            $this->session->set('name', $username);
+        }
+
+        return $this->response->setJSON($this->res);
+    }
+
     // public function index()
     // {
     //     $this->data['title'] = 'users';
