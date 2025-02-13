@@ -236,28 +236,15 @@ class Clients extends BaseController
         return;
     }
 
-    //         $clientInfo = [
-    //             'id' => $client_id,
-    //             'nif' => $formData['nif'],
-    //             'name' => $formData['name'],
-    //             'creation_date' => $creation_date
-    //         ];
+    public function getAllClients() 
+    {
+        return $this->response->setJSON($this->clientsModel->getAllClients());
+    }   
 
-    //         $contactInfo = [
-    //             'client_id' => $client_id,
-    //             'description' => $formData['description'],
-    //             'phone_number' => $formData['phoneNumber'],
-    //             'email_address' => $formData['emailAddress'],
-    //             'default' => 1
-    //         ];
+    public function getClientVehicles()
+    {
+        $clientCode = $this->request->getPost('codigo');
 
-    //         $this->clientsModel->createClient($clientInfo, $contactInfo);
-
-    //         $this->accountCreation($formData['emailAddress']);
-
-    //         $this->res['popUpMessages'][] = 'sucesso!';
-    //     }
-
-    //     return $this->response->setJSON($this->res);
-    // }
+        return $this->response->setJSON($this->clientsModel->getClientVehicles($clientCode));
+    }
 }

@@ -39,6 +39,11 @@ class ClientsModel extends Model
         
     }
 
+    public function getAllClients()
+    {
+        return $this->db->table('tb_clients')->select('client_code')->get()->getResultArray();
+    }
+
     public function getClientInfoByCode($clientCode)
     {
         $query = $this->db->table($this->table)
@@ -48,6 +53,11 @@ class ClientsModel extends Model
                           ->where('tb_contacts.contact_default', "true");
         
         return $query->get()->getResultArray();
+    }
+
+    public function getClientVehicles($clientCode) 
+    {
+        return $this->db->table('tb_clients_vehicles')->select('vehicle_license_plate')->where('vehicle_third_party_code', $clientCode)->get()->getResultArray();
     }
 
     public function insertContact($data)
