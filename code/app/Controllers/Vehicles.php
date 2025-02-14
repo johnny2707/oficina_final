@@ -49,11 +49,11 @@ class Vehicles extends BaseController
         return $this->response->setJSON($this->vehiclesModel->getVehiclesByThirdPartyCode($userThirdPartyCode[0]['user_third_party_code']));
     }
 
-    public function getVehicleData()
+    public function getVehicleByLicensePlate()
     {
-        $vehicleId = $this->request->getPost("vehicleId");
+        $licensePlate = $this->request->getPost("license_plate");
 
-        return $this->response->setJSON($this->vehiclesModel->getVehicleDataById($vehicleId));
+        return $this->response->setJSON($this->vehiclesModel->getVehicleByLicensePlate($licensePlate));
     }
 
 //     public function getVehicleByLicensePlate()

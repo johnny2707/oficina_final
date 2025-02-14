@@ -4,6 +4,7 @@ use App\Models\ClientsModel;
 use App\Models\UsersModel;
 use App\Models\VehiclesModel;
 use App\Models\TokensModel;
+use App\Database\Seeds\ClientSeeder;
 use CodeIgniter\I18n\Time;
 
 class Clients extends BaseController
@@ -240,6 +241,13 @@ class Clients extends BaseController
     {
         return $this->response->setJSON($this->clientsModel->getAllClients());
     }   
+
+    public function getClientInfoByCode()
+    {
+        $client_code = $this->request->getPost('client_code');
+        
+        return $this->response->setJSON($this->clientsModel->getClientInfoByCode($client_code));
+    }
 
     public function getClientVehicles()
     {

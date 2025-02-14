@@ -36,19 +36,20 @@ $routes->group('products', ['filter' => 'authGuard|permissionsValidation: PRODUC
 //CLIENTS
 
 $routes->group('clients', ['filter' => 'authGuard|permissionsValidation:CLIENTS, ALL'], function($routes){
-    $routes->get('create',              'Clients::createClientPage');
-    $routes->post('createClient',       'Clients::createClient');
-    $routes->get('getAllClients',       'Clients::getAllClients');
-    $routes->post('getVehiclesByCode',  'Clients::getClientVehicles');
+    $routes->get('create',                'Clients::createClientPage');
+    $routes->post('createClient',         'Clients::createClient');
+    $routes->get('getAllClients',         'Clients::getAllClients');
+    $routes->post('getClientInfoByCode',  'Clients::getClientInfoByCode');
+    $routes->post('getVehiclesByCode',    'Clients::getClientVehicles');
 });
 
 //VEHICLES
 
 $routes->group('vehicles', ['filter' => 'authGuard|permissionsValidation: VEHICLES, ALL'], function($routes){
-    $routes->get('myVehicle',                 'Vehicles::index');
-    $routes->get('historic',                  'Vehicles::historicPage');
-    $routes->get('getUserVehicles',           'Vehicles::getUserVehicles');
-    $routes->post('getVehicleData',           'Vehicles::getVehicleData');
+    $routes->get('myVehicle',                               'Vehicles::index');
+    $routes->get('historic',                                'Vehicles::historicPage');
+    $routes->get('getUserVehicles',                         'Vehicles::getUserVehicles');
+    $routes->post('getVehicleByLicensePlate',               'Vehicles::getVehicleByLicensePlate');
 });
 
 //EVENTS

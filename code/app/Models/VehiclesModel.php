@@ -40,9 +40,9 @@ class VehiclesModel extends Model
         return $query->get()->getResultArray();
     }
 
-    public function getVehicleDataById($vehicleId)
+    public function getVehicleByLicensePlate($license_plate)
     {
-        $query = $this->db->table($this->table)->select("*")->where('vehicle_id', $vehicleId);
+        $query = $this->db->table($this->table)->select("*")->where('vehicle_license_plate', $license_plate);
 
         return $query->get()->getResultArray();
     }
