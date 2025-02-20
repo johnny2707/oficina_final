@@ -50,12 +50,12 @@ $(document).ready(function () {
                     } 
                     else {
                         data.forEach(element => {
-                            console.log(element);
         
                             var newItem = {value: element.client_code, text: "C" + element.client_code}
                             clientsOptions.push(newItem);
                         });
 
+                        console.log(clientsOptions)
                         selectClient.addOptions(clientsOptions)
                     }
                 },

@@ -38,6 +38,8 @@ $routes->group('products', ['filter' => 'authGuard|permissionsValidation: PRODUC
 $routes->group('clients', ['filter' => 'authGuard|permissionsValidation:CLIENTS, ALL'], function($routes){
     $routes->get('create',                'Clients::createClientPage');
     $routes->post('createClient',         'Clients::createClient');
+    $routes->get('list',                  'Clients::list');
+    $routes->get('populateClientsTable',  'Clients::populateClientsTable');
     $routes->get('getAllClients',         'Clients::getAllClients');
     $routes->post('getClientInfoByCode',  'Clients::getClientInfoByCode');
     $routes->post('getVehiclesByCode',    'Clients::getClientVehicles');

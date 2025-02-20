@@ -237,6 +237,34 @@ class Clients extends BaseController
         return;
     }
 
+    public function list()
+    {
+        $this->data['title'] = 'CLIENT LIST';
+        $this->data['menu'] = 'CLIENTS';
+        $this->data['submenu'] = 'LIST';
+
+        return view('html/clientes/list', $this->data);
+    }
+
+    public function populateClientsTable()
+    {
+        $clientList = $this->clientsModel->getAllClients();
+        $dataTableData = [];
+        $c = 0;
+
+        foreach($clientList as $client)
+        {
+            $dataTableData[] = [
+                'client_code' => "C" . $client['client_code'],
+                'client_nif' => $client['client_nif'],
+                'client_name' => $client['client_name'],
+                'actions' => "<button class='btn btn-primary consultarButton' name='consultarButton' data-code='".$client['client_code']."' data-bs-toggle='modal'data-bs-target='#exampleModal'><i class='bi bi-eye'></i></button><button class='btn btn-success ms-3' name='editarButton' data-code='".$client['client_code']."'><i class='bi bi-pencil-square'></i></button><button class='btn btn-danger ms-3' name='deleteButton' data-id='".$client['client_code']."'><i class='bi bi-trash'></i></button>",
+            ];
+        }
+
+        return $this->response->setJSON($dataTableData);
+    }
+
     public function getAllClients() 
     {
         return $this->response->setJSON($this->clientsModel->getAllClients());
