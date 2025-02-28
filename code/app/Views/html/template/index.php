@@ -128,6 +128,14 @@
 							<span class="nav-link-title">SERVICE</span>
 						</a>
 					</li>
+					<li class="nav-item dropdown <?= isset($menu) && $menu == 'STOCK' ? 'active' : '' ?>">
+						<a href="<?= base_url('stock/index') ?>" class="nav-link" >
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="bi bi-box-fill"></i>
+							</span>
+							<span class="nav-link-title">STOCK</span>
+						</a>
+					</li>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'FATURA' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">

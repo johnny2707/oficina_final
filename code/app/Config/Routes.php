@@ -18,6 +18,13 @@ $routes->group('fatura', ['filter' => 'authGuard|permissionsValidation:FATURAS, 
     $routes->get('fatura',        'Fatura::fatura');
 });
 
+//STOCK
+
+$routes->group('stock', ['filter' => 'authGuard|permissionsValidation:STOCK, ALL'], function($routes){
+    $routes->get('index',          'Products::index');
+    $routes->get('getAllProducts', 'Products::getAllProducts');
+});
+
 // AUTHENTICATION
 
 $routes->group('auth', ['filter' => 'authValidation'], function($routes){

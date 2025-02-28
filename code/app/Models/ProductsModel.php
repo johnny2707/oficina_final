@@ -24,8 +24,8 @@ class ProductsModel extends Model
 
     public function getAllProducts()
     {
-        $query = $this->db->table('tb_services')->select('*');
+        $query = $this->db->table('tb_products')->select('*');
 
-        return $query->get()->getResult();
+        return $query->get()->getResultArray();
     }
 }
