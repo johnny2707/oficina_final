@@ -77,13 +77,13 @@ class Events extends BaseController
         }
 
         $eventData = [
-            'event_type'                  => $this->request->getPost('type'),
-            'event_vehicle_license_plate' => $this->request->getPost('licensePlate'),
-            'event_description'           => $this->request->getPost('description'),
-            'event_date'                  => $this->request->getPost('date'),
-            'event_start'                 => $this->request->getPost('start'),
-            'event_end'                   => $this->request->getPost('finish'),
-            'mechanic_id'                 => $this->request->getPost('mechanicId'),
+            'event_type'                  => $this->request->getPost('event_type'),
+            'event_vehicle_license_plate' => $this->request->getPost('event_vehicle_license_plate'),
+            'event_description'           => $this->request->getPost('event_description'),
+            'event_date'                  => $this->request->getPost('event_date'),
+            'event_start'                 => $this->request->getPost('event_start'),
+            'event_end'                   => $this->request->getPost('event_end'),
+            'event_mechanic_id'           => $this->request->getPost('event_mechanic_id'),
         ];
 
         $result = $this->eventsModel->createEvent($eventData);
@@ -101,6 +101,7 @@ class Events extends BaseController
         }
         else
         {
+            $this->res['error'] = TRUE;
             array_push($this->res['popUpMessages'], ["Error!"]);
         }
 

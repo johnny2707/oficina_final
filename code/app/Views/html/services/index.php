@@ -6,7 +6,7 @@
     <div class="page-header d-print-none">
         <div class="row align-items-center">
             <div class="col">
-                <h2 class="page-title">Ficha de Reparação</h2>
+                <h2 class="page-title">Ficha Técnica</h2>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputAddress" class="form-label">Data de Entrada</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="Data de Entrada">
+                                        <input type="date" class="form-control" id="inputAddress" placeholder="Data de Entrada">
                                     </div>
                                 </div>
                             </div>
@@ -42,8 +42,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="inputAddress" class="form-label">Km</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="Km">
+                                        <label for="inputAddress" class="form-label">Type</label>
+                                        <input type="text" class="form-control" id="inputAddress" placeholder="Type">
                                     </div>
                                 </div>
                             </div>
@@ -92,6 +92,20 @@
                             aria-selected="false"
                         >
                             Veículo
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="agendamento-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#agendamento"
+                            type="button"
+                            role="tab"
+                            aria-controls="agendamento"
+                            aria-selected="false"
+                        >
+                            Agendamento
                         </button>
                     </li>
                 </ul>
@@ -235,10 +249,80 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <label for="inputAddress" class="form-label">Km</label>
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="Km">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
                                     <label for="vehicleChassi" class="form-label">Chassi</label>
                                     <input type="text" class="form-control vehicleChassi" id="vehicleChassi" placeholder="chassi">
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="tab-pane py-3 bg-body-secondary border border-top-0 px-3"
+                        id="agendamento"
+                        role="tabpanel"
+                        aria-labelledby="agendamento-tab"
+                    >
+                        
+                        <div class="row">
+                            
+                            <div class="col-sm-2 d-flex align-items-end">
+                                <label class="form-label">Mechanic</label>
+                            </div>
+                            <div class="col-sm-4 d-flex align-items-end">
+                                <input type="text" id="selectMechanic" name="mechanicNumber" class="form-control">
+                            </div>
+
+                            <div class="col-sm-2 d-flex align-items-end">
+                                <label class="form-label">Date</label>
+                            </div>
+                            <div class="col-sm-4 d-flex align-items-end">
+                                <input type="date" id="eventDate" name="eventDate" class="form-control">
+                            </div>
+
+                            <div class="w-100 d-block mb-3"></div>
+
+                            <div class="col-sm-2 d-flex align-items-end">
+                                <label class="form-label">Start</label>
+                            </div>
+                            <div class="col-sm-4 d-flex align-items-end">
+                                <input type="time" id="eventStart" name="eventStart" class="form-control">
+                            </div>
+
+                            <div class="col-sm-2 d-flex align-items-end">
+                                <label class="form-label">End</label>
+                            </div>
+                            <div class="col-sm-4 d-flex align-items-end">
+                                <input type="time" id="eventEnd" name="eventEnd" class="form-control">
+                            </div>
+
+                            <div class="w-100 d-block mb-3"></div>
+
+                            <div class="col-sm-2 d-flex align-items-end">
+                                <label class="form-label">Description</label>
+                            </div>
+                            <div class="col-sm-10 d-flex align-items-end">
+                                <input type="text" id="eventDescription" name="eventDescription" class="form-control">
+                            </div>
+
+                            <div class="w-100 d-block mb-3"></div>
+
+                            <div class="col-sm-2 d-flex align-items-end">
+                                <label class="form-label">Observations</label>
+                            </div>
+                            <div class="col-sm-10 d-flex align-items-end">
+                                <textarea type="text" id="eventObservations" name="eventObservations" class="form-control" style="min-height: 5rem; field-sizing: content;"></textarea>
+                            </div>
+
+                            <div class="w-100 d-block mb-3"></div>
                         </div>
 
                     </div>

@@ -125,7 +125,7 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-file-earmark-text-fill"></i>
 							</span>
-							<span class="nav-link-title">SERVICES</span>
+							<span class="nav-link-title">SERVICE</span>
 						</a>
 					</li>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'FATURA' ? 'active' : '' ?>">
@@ -137,8 +137,8 @@
 						</a>
 						<div class="dropdown-menu">
 							<?php if (in_array('FATURA', $permissions) || in_array('ALL', $permissions)) : ?>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'DIRECT CREATION' ? 'active' : '' ?>" href="<?= base_url('fatura/criar') ?>">FATURA DIRETA</a>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('fatura/criar-fatura') ?>">FATURA</a>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'DIRECT CREATION' ? 'active' : '' ?>" href="<?= base_url('fatura/faturaDireta') ?>">FATURA DIRETA</a>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('fatura/fatura') ?>">FATURA</a>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'HISTORY' ? 'active' : '' ?>" href="<?= base_url('fatura/history') ?>">HISTÓRICO</a>
 							<?php endif; ?>
 						</div>

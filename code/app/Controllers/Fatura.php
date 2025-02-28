@@ -49,10 +49,17 @@ class Fatura extends BaseController
         ];
     }
 
-    public function criar()
+    public function faturaDireta()
     {
-        $this->data['title'] = 'ficha de reparação';
+        $this->data['title'] = 'Fatura Direta';
 
-        return view('html/fatura/index', $this->data);
+        return view('html/fatura/faturaDireta', $this->data);
+    }
+
+    public function fatura()
+    {
+        $this->data['title'] = 'Fatura';
+
+        return view('html/fatura/fatura', $this->data);
     }
 }

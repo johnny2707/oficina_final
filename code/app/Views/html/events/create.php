@@ -39,14 +39,14 @@
                                         <label class="form-label">type</label>
                                     </div>
                                     <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="eventType" class="form-control">
+                                        <input type="text" id="selectType" name="eventType" class="form-control">
                                     </div>
 
                                     <div class="col-sm-2 d-flex align-items-end">
                                         <label class="form-label">date</label>
                                     </div>
                                     <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="eventDate" class="form-control">
+                                        <input type="date" id="eventDate" name="eventDate" class="form-control">
                                     </div>
 
                                     <div class="w-100 d-block mb-3"></div>
@@ -55,14 +55,14 @@
                                         <label class="form-label">start</label>
                                     </div>
                                     <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="eventStart" class="form-control">
+                                        <input type="time" id="eventStart" name="eventStart" class="form-control">
                                     </div>
 
                                     <div class="col-sm-2 d-flex align-items-end">
                                         <label class="form-label">end</label>
                                     </div>
                                     <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="eventEnd" class="form-control">
+                                        <input type="time" id="eventEnd" name="eventEnd" class="form-control">
                                     </div>
 
                                     <div class="w-100 d-block mb-3"></div>
@@ -70,21 +70,23 @@
                                     <div class="col-sm-2 d-flex align-items-end">
                                         <label class="form-label">description</label>
                                     </div>
-                                    <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="eventDescription" class="form-control">
+                                    <div class="col-sm-10 d-flex align-items-end">
+                                        <input type="text" id="eventDescription" name="eventDescription" class="form-control">
                                     </div>
+
+                                    <div class="w-100 d-block mb-3"></div>
 
                                     <div class="col-sm-2 d-flex align-items-end">
                                         <label class="form-label">observations</label>
                                     </div>
-                                    <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="EventObservations" class="form-control">
+                                    <div class="col-sm-10 d-flex align-items-end">
+                                        <textarea type="text" id="eventObservations" name="eventObservations" class="form-control" style="min-height: 5rem; field-sizing: content;"></textarea>
                                     </div>
 
                                     <div class="w-100 d-block mb-3"></div>
                                 </div>
 
-                                <button type="button" class="btn btn-primary w-100">Criar</button>
+                                <button type="button" class="btn btn-primary w-100 createEventButton">Criar</button>
                             </div>
                         </div>
 

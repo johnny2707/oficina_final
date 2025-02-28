@@ -10,7 +10,13 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->get('/', 'Dashboard::index', ['filter' => 'authGuard']);
 
-$routes->get('fatura/criar', 'Fatura::criar');
+
+//FATURA
+
+$routes->group('fatura', ['filter' => 'authGuard|permissionsValidation:FATURAS, ALL'], function($routes){
+    $routes->get('faturaDireta',  'Fatura::faturaDireta');
+    $routes->get('fatura',        'Fatura::fatura');
+});
 
 // AUTHENTICATION
 
@@ -73,6 +79,7 @@ $routes->group('calendar', ['filter' => 'authGuard|permissionsValidation: EVENTS
     $routes->get('index',               'Events::index');
     $routes->post('events',             'Events::listOfEvents');
     $routes->get('create',              'Events::createEventLoadPage');
+    $routes->post('create',             'Events::createEvent');
 });
 
 //USERS
@@ -97,5 +104,6 @@ $routes->get('clock', 'Clock::index');
 
 // SERVICES
 $routes->group('services', ['filter' => 'authGuard|permissionsValidation: SERVICES, ALL'], function($routes){
-    $routes->get('index', 'Services::index');
+    $routes->get('index',          'Services::index');
+    $routes->get('getAllServices', 'Services::getAllServices');
 });

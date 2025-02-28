@@ -25,7 +25,7 @@ class MechanicsModel extends Model
 
     public function getAllMechanics()
     {
-        $query = $this->db->table('tb_mechanics')->select('*');
+        $query = $this->db->table('tb_employees')->select('*')->where('employee_group_id', 1);
 
         return $query->get()->getResultArray();
     }

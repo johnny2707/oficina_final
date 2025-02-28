@@ -37,6 +37,7 @@ $(document).ready(function () {
 
     var vehicleOptions;
     var clientsOptions = [];
+    var mechanicOptions = [];
 
     let selectClient = new TomSelect('#selectClient', {
         options: [],
@@ -87,15 +88,15 @@ $(document).ready(function () {
                         else {
                             console.log(data);
                             
-                            $('.clientName').val(data[0]['client_name']);
-                            $('.clientNif').val(data[0]['client_nif']);
-                            $('.clientAddress').val(data[0]['client_address']);
-                            $('.clientCity').val(data[0]['client_city']);
-                            $('.clientPostCode').val(data[0]['client_post_code']);
-                            $('.clientCounty').val(data[0]['client_county']);
-                            $('.clientCountry').val(data[0]['client_country']);
-                            $('.clientPhoneNumber').val(data[0]['contact_phone_number']);
-                            $('.clientEmail').val(data[0]['contact_email']);
+                            $('.clientName').val(data['client']['client_name']);
+                            $('.clientNif').val(data['client']['client_nif']);
+                            $('.clientAddress').val(data['client']['client_address']);
+                            $('.clientCity').val(data['client']['client_city']);
+                            $('.clientPostCode').val(data['client']['client_post_code']);
+                            $('.clientCounty').val(data['client']['client_county']);
+                            $('.clientCountry').val(data['client']['client_country']);
+                            $('.clientPhoneNumber').val(data['contacts'][0]['contact_phone_number']);
+                            $('.clientEmail').val(data['contacts'][0]['contact_email']);
                             
                         }
                     },
@@ -145,6 +146,41 @@ $(document).ready(function () {
         dropdownClass: 'dropdown-menu ts-dropdown',
         optionClass: 'dropdown-item',
         dropdownParent: 'body'
+    });
+
+    let selectMechanic = new TomSelect('#selectMechanic', {
+        options: [],
+        maxItems: 1, 
+        dropdownClass: 'dropdown-menu ts-dropdown',
+        optionClass: 'dropdown-item',
+        dropdownParent: 'body',
+        onInitialize: () => {
+            $.ajax({
+                type: "get",
+                url: `${baseURL}mechanics/getAllMechanics`,
+                success: function (data) {
+                    if (data.length === 0) {
+                        mechanicOptions.push({value: 0, text: "no items found"})
+                    } 
+                    else {
+                        data.forEach(element => {
+        
+                            var newItem = {value: element.employee_id, text: element.employee_name}
+                            mechanicOptions.push(newItem);
+                        });
+
+                        console.log(mechanicOptions)
+                        selectMechanic.addOptions(mechanicOptions)
+                        selectMechanic.sync();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+        }
     });
 
     $(".ts-dropdown").css("z-index", "9999");
