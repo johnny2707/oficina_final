@@ -15,7 +15,7 @@ class LogsModel extends Model
         $this->db = \Config\Database::connect();
     }
 
-    public function index($log)
+    public function log($log)
     {
         $this->db->table($this->table)->insert($log);
     }

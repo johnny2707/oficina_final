@@ -2,6 +2,7 @@
 
 use App\Models\MechanicsModel;
 use App\Models\UsersModel;
+use App\Models\LogsModel;
 use DateTime;
 use PhpParser\Node\Expr\FuncCall;
 use Symfony\Component\Console\Descriptor\Descriptor;
@@ -11,6 +12,7 @@ class Mechanics extends BaseController
 {
     protected $session;
     protected $mechanicsModel;
+    protected $logsModel;
     protected $res;
     protected $data;
     protected $usersModel;
@@ -23,6 +25,9 @@ class Mechanics extends BaseController
         $this->session = \Config\Services::session();
         $this->mechanicsModel = new MechanicsModel;
         $this->usersModel = new UsersModel;
+        $this->logsModel = new LogsModel;
+
+        $this->db = \Config\Database::connect();
 
         $this->seeder = \Config\Database::seeder();
 
@@ -43,6 +48,13 @@ class Mechanics extends BaseController
             'customCSS' => '',
             'customJS' => '<script src="'. base_url('assets/js/custom/mechanics.js?' . $_ENV['VERSION'] ).'"></script>'
         ];
+    }
+
+    public function getAllMechanics()
+    {
+        $mechanics = $this->mechanicsModel->getAllMechanics();
+
+        return $this->response->setJSON($mechanics);
     }
 
     //CREATE MECHANIC
@@ -96,6 +108,13 @@ class Mechanics extends BaseController
             ];
 
             $this->mechanicsModel->createMechanic($mechanicInfo);
+            
+            $this->logsModel->log([
+                'log_third_party_id' => $this->session->get('id'),
+                'log_type' => 'mechanic creation',
+                'log_description' => 'User created a new mechanic with id: ' . $mechanic_id,
+                'log_date' => date('Y-m-d H:i:s')
+            ]);
 
             $this->accountCreation($formData['emailAddress']);
 
@@ -140,6 +159,13 @@ class Mechanics extends BaseController
         }
         else
         {
+            $this->logsModel->log([
+                'log_third_party_id' => $this->session->get('id'),
+                'log_type' => 'update_mechanic',
+                'log_description' => 'User updated mechanic with id: ' . $mechanicData['id'],
+                'log_date' => date('Y-m-d H:i:s')
+            ]);
+
             $this->res['popUpMessages'][] = 'sucesso!';
         }
 
@@ -262,6 +288,13 @@ class Mechanics extends BaseController
         $mechanic_id = $this->request->getPost('mechanicId');
 
         $this->mechanicsModel->deleteMechanic($mechanic_id);
+
+        $this->logsModel->log([
+            'log_third_party_id' => $this->session->get('id'),
+            'log_type' => 'delete_mechanic',
+            'log_description' => 'User deleted mechanic with id: ' . $mechanic_id,
+            'log_date' => date('Y-m-d H:i:s')
+        ]);
 
         $this->res['popUpMessages'][] = 'eliminado com sucesso!';
         return $this->response->setJSON($this->res);

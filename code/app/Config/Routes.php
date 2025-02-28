@@ -52,6 +52,19 @@ $routes->group('vehicles', ['filter' => 'authGuard|permissionsValidation: VEHICL
     $routes->get('historic',                                'Vehicles::historicPage');
     $routes->get('getUserVehicles',                         'Vehicles::getUserVehicles');
     $routes->post('getVehicleByLicensePlate',               'Vehicles::getVehicleByLicensePlate');
+    $routes->get('getAllVehicles',                          'Vehicles::getAllVehicles');
+});
+
+//MECHANICS
+
+$routes->group('mechanics', ['filter' => 'authGuard|permissionsValidation: MECHANICS, ALL'], function($routes){
+    $routes->get('index',                                   'Mechanics::index');
+    $routes->get('create',                                  'Mechanics::createMechanicPage');
+    $routes->post('createMechanic',                         'Mechanics::createMechanic');
+    $routes->get('list',                                    'Mechanics::list');
+    $routes->get('populateMechanicsTable',                  'Mechanics::populateMechanicsTable');
+    $routes->get('getAllMechanics',                         'Mechanics::getAllMechanics');
+    $routes->post('getMechanicByNumber',                    'Mechanics::getMechanicByNumber');
 });
 
 //EVENTS
@@ -79,12 +92,6 @@ $routes->group("users", ['filter' => 'authGuard|permissionsValidation: ACCOUNT, 
     $routes->get('/users/my-password',          'Users::myPassword');
     $routes->post('/users/my-password',         'Users::updateMyPassword');
 });
-
-$routes->get('table',               'Users::populateUsersTable');
-$routes->get('(:hash)/update',      'Users::update/$1');
-$routes->post('(:hash)/update',     'Users::updateUser/$1');
-$routes->post('(:hash)/activate',   'Users::activateUser/$1');
-$routes->post('(:hash)/inactivate', 'Users::inactivateUser/$1');
 
 $routes->get('clock', 'Clock::index');
 

@@ -3,6 +3,7 @@
 use App\Models\MechanicsModel;
 use App\Models\ClientsModel;
 use App\Models\EventsModel;
+use App\Models\LogsModel;
 use DateTime;
 use PhpParser\Node\Expr\FuncCall;
 use Symfony\Component\Console\Descriptor\Descriptor;
@@ -16,6 +17,7 @@ class Events extends BaseController
     protected $data;
     protected $clientsModel;
     protected $eventsModel;
+    protected $logsModel;
     protected $seeder;
     protected $email;
     protected $db;
@@ -26,6 +28,9 @@ class Events extends BaseController
         $this->mechanicsModel = new MechanicsModel;
         $this->clientsModel = new ClientsModel;
         $this->eventsModel = new EventsModel;
+        $this->logsModel = new LogsModel;
+
+        $this->db = \Config\Database::connect();
 
         $this->seeder = \Config\Database::seeder();
 
@@ -51,8 +56,6 @@ class Events extends BaseController
     public function createEventLoadPage()
     {
         $this->data['title'] = 'EVENT CREATION';
-        // $this->data['mechanics'] = $this->mechanicsModel->getAllMechanics();
-        // $this->data['types'] = $this->eventsModel->getAllTypes();
 
         return view('html/events/create', $this->data);
     }
@@ -60,11 +63,12 @@ class Events extends BaseController
     public function createEvent()
     {
         $validationRules = array(
-            'type'              => ['rules' => 'required'],
-            'event_description' => ['rules' => 'required'],
-            'event_date'        => ['rules' => 'required'],
-            'event_start'       => ['rules' => 'required'],
-            'event_end'         => ['rules' => 'required']
+            'event_type'                      => ['rules' => 'required'],
+            'event_vehicle_license_plate'     => ['rules' => 'required'],
+            'event_description'               => ['rules' => 'required'],
+            'event_date'                      => ['rules' => 'required'],
+            'event_start'                     => ['rules' => 'required'],
+            'event_end'                       => ['rules' => 'required']
         );
 
         if(!$this->validate($validationRules))
@@ -73,19 +77,26 @@ class Events extends BaseController
         }
 
         $eventData = [
-            'type' => $this->request->getPost('type'),
-            'event_description' => $this->request->getPost('description'),
-            'event_date' => $this->request->getPost('date'),
-            'event_start' => $this->request->getPost('start'),
-            'event_end' => $this->request->getPost('finish'),
-            'mechanic_id' => $this->request->getPost('mechanicId'),
-            'completed' => 0
+            'event_type'                  => $this->request->getPost('type'),
+            'event_vehicle_license_plate' => $this->request->getPost('licensePlate'),
+            'event_description'           => $this->request->getPost('description'),
+            'event_date'                  => $this->request->getPost('date'),
+            'event_start'                 => $this->request->getPost('start'),
+            'event_end'                   => $this->request->getPost('finish'),
+            'mechanic_id'                 => $this->request->getPost('mechanicId'),
         ];
 
         $result = $this->eventsModel->createEvent($eventData);
 
         if(!$result)
         {
+            $this->logsModel->log([
+                'log_third_party_id' => $this->session->get('id'),
+                'log_type' => 'event creation',
+                'log_description' => 'User created a new event',
+                'log_date' => date('Y-m-d H:i:s')
+            ]);
+
             array_push($this->res['popUpMessages'], ["Sucesso!"]);
         }
         else
@@ -171,7 +182,7 @@ class Events extends BaseController
                         " . $interventions['event_description'],
                     'start' => $interventions['event_date'] . "T" . $interventions['event_start'],
                     'end'   => $interventions['event_date'] . "T" . $interventions['event_end'],
-                    'color' => $interventions['event_color'] . (Time() > $interventions['event_date'] ? '80' : ''),
+                    'color' => (strtotime(date('Y-m-d H:i:s')) > strtotime($interventions['event_date']. ' ' .$interventions['event_end']) ? '#FF000090' : '#FF0000'),
                     'url'   => base_url("events/{$interventions['event_id']}/update")
                 ));
             }

@@ -4,6 +4,7 @@ use App\Models\ClientsModel;
 use App\Models\UsersModel;
 use App\Models\VehiclesModel;
 use App\Models\TokensModel;
+use App\Models\LogsModel;
 use App\Database\Seeds\ClientSeeder;
 use CodeIgniter\I18n\Time;
 
@@ -12,6 +13,7 @@ class Clients extends BaseController
     protected $session;
 
     protected $clientsModel;
+    protected $logsModel;
     protected $usersModel;
     protected $vehiclesModel;
     protected $tokensModel;
@@ -29,6 +31,7 @@ class Clients extends BaseController
         $this->usersModel = new UsersModel;
         $this->vehiclesModel = new VehiclesModel;
         $this->tokensModel = new TokensModel;
+        $this->logsModel = new LogsModel;
 
         $this->email = \Config\Services::email();
 
@@ -206,6 +209,13 @@ class Clients extends BaseController
 
             if($this->clientsModel->insertClient($client) && $this->clientsModel->insertContact($contact) && $this->vehiclesModel->insertVehicle($vehicle) && $this->tokensModel->insertToken($tokenData))
             {
+                $this->logsModel->log([
+                    'log_third_party_id' => $this->session->get('id'),
+                    'log_type' => 'client_creation',
+                    'log_description' => 'User created new client with code ' . $formData['client_code'],
+                    'log_date' => date('Y-m-d H:i:s')
+                ]);
+
                 $this->accountCreationEmail($formData['client_email'], $USER_TOKEN);
             }
             else

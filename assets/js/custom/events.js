@@ -50,4 +50,78 @@ $(document).ready(function() {
     });
     calendar.render();
 
+    let mechanicOptions = [];
+    let vehicleOptions = [];
+
+    let selectMechanic = new TomSelect('#selectMechanic', {
+        options: [],
+        maxItems: 1, 
+        dropdownClass: 'dropdown-menu ts-dropdown',
+        optionClass: 'dropdown-item',
+        dropdownParent: 'body',
+        onInitialize: () => {
+            $.ajax({
+                type: "get",
+                url: `${baseURL}mechanics/getAllMechanics`,
+                success: function (data) {
+                    if (data.length === 0) {
+                        mechanicOptions.push({value: 0, text: "no items found"})
+                    } 
+                    else {
+                        data.forEach(element => {
+        
+                            var newItem = {value: element.mechanic_id, text: element.mechanic_name}
+                            mechanicOptions.push(newItem);
+                        });
+
+                        console.log(mechanicOptions)
+                        selectMechanic.addOptions(mechanicOptions)
+                        selectMechanic.sync();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+        }
+    });
+
+    let selectVehicleSelect = document.getElementById('selectVehicle');
+
+    let selectVehicle = new TomSelect(selectVehicleSelect, {
+        options: [],
+        maxItems: 1, 
+        dropdownClass: 'dropdown-menu ts-dropdown',
+        optionClass: 'dropdown-item',
+        dropdownParent: 'body',
+        onInitialize: () => {
+            $.ajax({
+                type: "get",
+                url: `${baseURL}vehicles/getAllVehicles`,
+                success: function (data) {
+                    if (data.length === 0) {
+                        vehicleOptions.push({value: 0, text: "no items found"})
+                    } 
+                    else {
+                        data.forEach(element => {
+        
+                            var newItem = {value: element.vehicle_license_plate, text: element.vehicle_license_plate}
+                            vehicleOptions.push(newItem);
+                        });
+
+                        console.log(vehicleOptions)
+                        selectVehicle.addOptions(vehicleOptions)
+                        selectVehicle.sync();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+        }
+    });
 });

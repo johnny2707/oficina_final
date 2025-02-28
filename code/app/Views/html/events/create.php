@@ -23,14 +23,14 @@
                                         <label class="form-label">vehicle</label>
                                     </div>
                                     <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="vehicleLicensePlate" class="form-control">
+                                        <input type="text" id="selectVehicle" name="vehicleLicensePlate" class="form-control">
                                     </div>
                                     
                                     <div class="col-sm-2 d-flex align-items-end">
                                         <label class="form-label">mechanic</label>
                                     </div>
                                     <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" name="mechanicNumber" class="form-control">
+                                        <input type="text" id="selectMechanic" name="mechanicNumber" class="form-control">
                                     </div>
 
                                     <div class="w-100 d-block mb-3"></div>

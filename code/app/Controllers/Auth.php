@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\UsersModel;
+use App\Models\LogsModel;
 use CodeIgniter\Debug\Toolbar\Collectors\Views;
 use PhpOffice\PhpSpreadsheet\Calculation\Engineering\BitWise;
 use PhpOffice\PhpSpreadsheet\Worksheet\Validations;
@@ -10,6 +11,7 @@ class Auth extends BaseController
 {   
     protected $session;
     protected $usersModel;
+    protected $logsModel;
     protected $res;
     protected $data;
     protected $email;
@@ -19,6 +21,7 @@ class Auth extends BaseController
     {
         $this->session = \Config\Services::session();
         $this->usersModel = new UsersModel;
+        $this->logsModel = new LogsModel;
         $this->email = \Config\Services::email();
         $this->validation = \Config\Services::validation();
         
@@ -92,6 +95,13 @@ class Auth extends BaseController
                         'permissions' => json_decode($userData[0]['group_permissions'], true),
                     ]);
 
+                    $this->logsModel->log([
+                        'log_third_party_id' => $this->session->get('id'),
+                        'log_type' => 'login',
+                        'log_description' => 'User logged in',
+                        'log_date' => date('Y-m-d H:i:s')
+                    ]);
+
                     $this->res['popUpMessages'][] = 'Login efetuado com sucesso!';
                 }
             }
@@ -103,6 +113,13 @@ class Auth extends BaseController
     public function Logout()
     {
         $this->session->destroy();
+        $this->logsModel->log([
+            'log_third_party_id' => $this->session->get('id'),
+            'log_type' => 'logout',
+            'log_description' => 'User logged out',
+            'log_date' => date('Y-m-d H:i:s')
+        ]);
+
         return redirect()->to(base_url('auth'));
     }
 
@@ -177,6 +194,13 @@ class Auth extends BaseController
             $userData = $this->usersModel->getUserDataByEmail($email);
 
             $this->usersModel->updateUser($userData[0]['user_id'], ['user_password' => password_hash($password, PASSWORD_DEFAULT)]);
+
+            $this->logsModel->log([
+                'log_third_party_id' => $this->session->get('id'),
+                'log_type' => 'password_change',
+                'log_description' => 'User changed password',
+                'log_date' => date('Y-m-d H:i:s')
+            ]);
 
             $this->res['popUpMessages'][] = 'Password atualizada com sucesso!';
         }

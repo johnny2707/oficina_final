@@ -33,6 +33,13 @@ class Vehicles extends BaseController
         ];
     }
 
+    public function getAllVehicles()
+    {
+        $vehicles = $this->vehiclesModel->getAllVehicles();
+
+        return $this->response->setJSON($vehicles);
+    }
+
     public function index()
     {
         $this->data['title'] = 'MY VEHICLE';
@@ -55,16 +62,4 @@ class Vehicles extends BaseController
 
         return $this->response->setJSON($this->vehiclesModel->getVehicleByLicensePlate($licensePlate));
     }
-
-//     public function getVehicleByLicensePlate()
-//     {
-//         $licensePlate = $this->request->getPost("licensePlate");
-
-//         return $this->response->setJSON($this->vehiclesModel->getVehicleByLicensePlate($licensePlate));
-//     }
-
-//     public function getAllVehicles()
-//     {
-//         return $this->response->setJSON($this->vehiclesModel->getAllVehicles());
-//     }
 }

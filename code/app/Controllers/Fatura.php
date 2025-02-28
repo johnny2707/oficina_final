@@ -3,6 +3,7 @@
 use App\Models\ClientsModel;
 use App\Models\UsersModel;
 use App\Models\VehiclesModel;
+use App\Models\LogsModel;
 
 class Fatura extends BaseController
 {
@@ -15,6 +16,7 @@ class Fatura extends BaseController
     protected $email;
     protected $db;
     protected $vehiclesModel;
+    protected $logsModel;
 
     public function __construct()
     {
@@ -22,6 +24,9 @@ class Fatura extends BaseController
         $this->clientsModel = new ClientsModel;
         $this->usersModel = new UsersModel;
         $this->vehiclesModel = new VehiclesModel;
+        $this->logsModel = new LogsModel;
+
+        $this->db = \Config\Database::connect();
 
         $this->seeder = \Config\Database::seeder();
 
