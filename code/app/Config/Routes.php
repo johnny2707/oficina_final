@@ -23,6 +23,7 @@ $routes->group('fatura', ['filter' => 'authGuard|permissionsValidation:FATURAS, 
 $routes->group('stock', ['filter' => 'authGuard|permissionsValidation:STOCK, ALL'], function($routes){
     $routes->get('index',          'Products::index');
     $routes->get('getAllProducts', 'Products::getAllProducts');
+    $routes->post('getProduct',    'Products::getProduct');
 });
 
 // AUTHENTICATION

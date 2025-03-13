@@ -15,6 +15,13 @@ class ProductsModel extends Model
         $this->db = \Config\Database::connect();
     }
 
+    public function getProduct($productID)
+    {
+        $query = $this->db->table('tb_products')->select('product_code, product_description, unit_description AS product_unit, product_price')->join('tb_products', 'product_unit_id = unit_id')->where('product_id', $productID);
+    
+        return $query->get()->getResultArray();
+    }
+
     public function getProductByCode($productCode)
     {
         $query = $this->db->table('tb_services')->select('service_code, service_description, unit_code, service_price_without_iva')->join('tb_units', 'service_unit_id = unit_id')->where('service_code', $productCode);

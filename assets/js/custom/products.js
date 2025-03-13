@@ -39,6 +39,35 @@ $(document).ready(function () {
                     console.log(error);
                 }
             });
+        },
+        onChange: () => {
+            let selectedProduct = selectProduct.getValue();
+            console.log(selectedProduct);
+
+            $.ajax({
+                type: "post",
+                url: `${baseURL}stock/getProduct`,
+                data: {
+                    product_id: selectedProduct
+                },
+                dataType: "json",
+                success: function (response) {
+                    if(response.error == true) {
+                        response.popUpMessages.forEach(element => {
+                            notyf.error(element);
+                        });
+                    }
+                    else {
+                        console.log(response.product);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+
         }
     });
 

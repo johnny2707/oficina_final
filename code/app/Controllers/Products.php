@@ -36,6 +36,13 @@ class Products extends BaseController
         return view('html/products/index', $this->data);
     }
 
+    public function getProduct() 
+    {
+        $productID = $this->request->getPost('product_id');
+        
+        return $this->response->setJSON($this->productsModel->getProduct($productID));
+    }
+
     public function getProductByCode()
     {
         $productCode = $this->request->getPost('codigo');
