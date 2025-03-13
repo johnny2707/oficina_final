@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="inputAddress" class="form-label">Data de Entrada</label>
+                                        <label for="inputAddress" class="form-label">Data de Criação</label>
                                         <input type="date" class="form-control" id="inputAddress" placeholder="Data de Entrada">
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputAddress" class="form-label">Type</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="Type">
+                                        <input type="text" class="form-control selectServiceType" id="selectServiceType" placeholder="Type">
                                     </div>
                                 </div>
                             </div>
@@ -55,27 +55,13 @@
                     <li class="nav-item" role="presentation">
                         <button
                             class="nav-link active"
-                            id="servicos-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#servicos"
-                            type="button"
-                            role="tab"
-                            aria-controls="servicos"
-                            aria-selected="false"
-                        >
-                            Serviços
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link"
                             id="cliente-tab"
                             data-bs-toggle="tab"
                             data-bs-target="#cliente"
                             type="button"
                             role="tab"
                             aria-controls="cliente"
-                            aria-selected="false"
+                            aria-selected="true"
                         >
                             Cliente
                         </button>
@@ -108,44 +94,25 @@
                             Agendamento
                         </button>
                     </li>
+                    <li class="nav-item d-none" id="descricao-li" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="descricao-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#descricao"
+                            type="button"
+                            role="tab"
+                            aria-controls="descricao"
+                            aria-selected="false"
+                        >
+                            Descrição
+                        </button>
+                    </li>
                 </ul>
                 <div class="tab-content">
-                    <div
-                        class="tab-pane active py-3 bg-body-secondary border border-top-0 px-3"
-                        id="servicos"
-                        role="tabpanel"
-                        aria-labelledby="servicos-tab"
-                    >
-                        <div class="table-responsive">
-                            <table class="table align-middle">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Código</th>
-                                        <th scope="col">Descrição</th>
-                                        <th scope="col">Quantidade</th>
-                                        <th scope="col">Unidade</th>
-                                        <th scope="col">Preço s/IVA</th>
-                                        <th scope="col">Desconto</th>
-                                        <th scope="col">Preço</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableBody">
-                                    <tr draggable="false">
-                                        <td scope="row"><input class="form-control serviceSelect" type="text" name="serviceSelect" id="serviceSelect"></td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
 
                     <div
-                        class="tab-pane py-3 bg-body-secondary border border-top-0 px-3"
+                        class="tab-pane py-3 active bg-body-secondary border border-top-0 px-3"
                         id="cliente"
                         role="tabpanel"
                         aria-labelledby="cliente-tab"
@@ -326,7 +293,33 @@
                         </div>
 
                     </div>
+
+                    <div
+                        class="tab-pane py-3 bg-body-secondary border border-top-0 px-3"
+                        id="descricao"
+                        role="tabpanel"
+                        aria-labelledby="descricao-tab"
+                    >
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="clientName" class="form-label">Descrição</label>
+                                    <textarea type="text" class="form-control description" id="description" placeholder="Descrição" style="field-sizing: content; min-height: 20vh; resize: none;"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="clientNif" class="form-label">Anexos</label>
+                                    <input type="file" class="form-control anexos" id="anexos" placeholder="anexos" multiple>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
+                <button type="button" class="btn btn-primary w-100 mt-5">criar</button>
             </div>
         </div>
     </div>

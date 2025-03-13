@@ -38,6 +38,7 @@ $(document).ready(function () {
     var vehicleOptions;
     var clientsOptions = [];
     var mechanicOptions = [];
+    var serviceOptions = [];
 
     let selectClient = new TomSelect('#selectClient', {
         options: [],
@@ -180,6 +181,50 @@ $(document).ready(function () {
                     console.log(error);
                 }
             });
+        }
+    });
+
+    let selectServiceType = new TomSelect('#selectServiceType', {
+        options: [],
+        maxItems: 1, 
+        dropdownClass: 'dropdown-menu ts-dropdown',
+        optionClass: 'dropdown-item',
+        dropdownParent: 'body',
+        onInitialize: () => {
+            $.ajax({
+                type: "get",
+                url: `${baseURL}services/getAllServices`,
+                success: function (data) {
+                    if (data.length === 0) {
+                        serviceOptions.push({value: 0, text: "no items found"})
+                    } 
+                    else {
+                        data.forEach(element => {
+        
+                            var newItem = {value: element.service_code, text: element.service_description}
+                            serviceOptions.push(newItem);
+                        });
+
+                        console.log(serviceOptions)
+                        selectServiceType.addOptions(serviceOptions)
+                        selectServiceType.sync();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+        },
+        onChange: () => {
+            if($('#selectServiceType').val() != "") {
+                if($('#selectServiceType').val() == "S000001") {
+                    console.log("hello world");
+
+                    $("#descricao-li").removeClass("d-none");
+                }
+            }
         }
     });
 
