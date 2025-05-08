@@ -31,8 +31,14 @@ class ProductsModel extends Model
 
     public function getAllProducts()
     {
-        $query = $this->db->table('tb_products')->select('*');
+        $query = $this->db->table('tb_products')->select('tb_products.*, unit_description AS product_unit')
+                                                ->join('tb_units', 'product_unit_id = unit_id');
 
         return $query->get()->getResultArray();
+    }
+
+    public function createProduct($data)
+    {
+        $this->db->table('tb_products')->insert($data);
     }
 }

@@ -260,7 +260,6 @@ class Clients extends BaseController
     {
         $clientList = $this->clientsModel->getAllClients();
         $dataTableData = [];
-        $c = 0;
 
         foreach($clientList as $client)
         {

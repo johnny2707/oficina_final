@@ -21,9 +21,12 @@ $routes->group('fatura', ['filter' => 'authGuard|permissionsValidation:FATURAS, 
 //STOCK
 
 $routes->group('stock', ['filter' => 'authGuard|permissionsValidation:STOCK, ALL'], function($routes){
-    $routes->get('index',          'Products::index');
-    $routes->get('getAllProducts', 'Products::getAllProducts');
-    $routes->post('getProduct',    'Products::getProduct');
+    $routes->get('index',                 'Products::index');
+    $routes->get('getAllProducts',        'Products::getAllProducts');
+    $routes->post('getProduct',           'Products::getProduct');
+    $routes->get('populateProductsTable', 'Products::populateProductsTable');
+    $routes->get('criarProduto',          'Products::createProductPage');
+    $routes->post('criarProduto',          'Products::createProduct');
 });
 
 // AUTHENTICATION

@@ -128,12 +128,18 @@
 						</a>
 					</li>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'STOCK' ? 'active' : '' ?>">
-						<a href="<?= base_url('stock/index') ?>" class="nav-link" >
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-box-fill"></i>
 							</span>
 							<span class="nav-link-title">STOCK</span>
 						</a>
+						<div class="dropdown-menu">
+							<?php if (in_array('STOCK', $permissions) || in_array('ALL', $permissions)) : ?>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('stock/criarProduto') ?>">CRIAR PRODUTO</a>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'LIST' ? 'active' : '' ?>" href="<?= base_url('stock/index') ?>">STOCK</a>
+							<?php endif; ?>
+						</div>
 					</li>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'FATURA' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
