@@ -25,6 +25,8 @@ class Auth extends BaseController
         $this->email = \Config\Services::email();
         $this->validation = \Config\Services::validation();
         
+        helper('codeGenerator');
+
         $this->res = [
             'error' => FALSE,
             'popUpMessages' => array(),
@@ -128,11 +130,15 @@ class Auth extends BaseController
         return view('html/auth/recoverPassword', $this->data);
     }
 
+    
+
     public function SendPasswordRecoveryEmail()
     {
+        $code = generateRandomCode();
+
         $userEmail = $this->request->getPost('email');
 
-        $emailBody = view('html/auth/emailTemplate', ['email' => $userEmail]);
+        $emailBody = view('html/auth/emailTemplate', ['email' => $userEmail, 'code' => $code]);
 
         $this->email->setMailType('html');
 
@@ -155,6 +161,11 @@ class Auth extends BaseController
     {
         return view('html/auth/emailSentConfirmation', ['email' => $email]);
     } 
+
+    public function ValidateCode()
+    {
+        return $this->response->setJSON(['error' => false]);
+    }
 
     public function ShowNewPasswordPage($email)
     {

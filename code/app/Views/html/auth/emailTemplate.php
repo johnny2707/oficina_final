@@ -220,7 +220,7 @@
                                 <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
                                 <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Enviámos este email para poder recuperar a sua palavra-passe. Se não pediu esta recuperação por favor ignore este email.</span></p>
                                 <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
-                                <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Para proceder com a recuperação por favor clique o link abaixo:</span></p>
+                                <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Para proceder com a recuperação por favor insira o código abaixo:</span></p>
                               </div>
 
                             </td>
@@ -228,21 +228,11 @@
                         </tbody>
                       </table>
 
-                      <table style="font-family:'Lato',sans-serif;border:0px;" role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                        <tbody>
-                          <tr>
-                            <td style="overflow-wrap:break-word;word-break:break-word;padding:0px 40px;font-family:'Lato',sans-serif;margin-right:auto;">
-                              
-                              <div style="margin-right:auto;">
-                                <a href="<?= base_url('auth/newPassword/'.$email) ?>" target="_blank" class="v-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #cd5c08; border-radius: 1px;-webkit-border-radius: 1px; -moz-border-radius: 1px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;">
-                                  <span style="display:block;padding:15px 40px;line-height:120%;"><span style="font-size: 18px; line-height: 21.6px;">Recuperar Palavra-passe</span></span>
-                                </a>
-                              </div>
-
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      
+                      <div style="width: 100%; text-align: center;">
+                        <span style=" font-weight: bold; font-size: 80px;"><?= $code ?></span>
+                      </div>
+                      
 
                       <table style="font-family:'Lato',sans-serif;border:0px;" role="presentation" cellpadding="0" cellspacing="0" width="100%">
                         <tbody>

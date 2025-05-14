@@ -39,6 +39,7 @@ $routes->group('auth', ['filter' => 'authValidation'], function($routes){
 $routes->get('/auth/recoverPassword',                  'Auth::ShowPasswordRecoveryPage');
 $routes->post('/auth/sendPasswordEmail',               'Auth::SendPasswordRecoveryEmail');
 $routes->get('/auth/emailSentConfirmation/(:segment)', 'Auth::ShowEmailSentConfirmationPage/$1');
+$routes->post('/auth/validateCode',                    'Auth::ValidateCode');
 $routes->get('/auth/newPassword/(:segment)',           'Auth::ShowNewPasswordPage/$1');
 $routes->post('/auth/updatePassword',                  'Auth::UpdatePassword');
 $routes->get('/auth/logout',                           'Auth::logout', ['filter' => 'authGuard']);

@@ -21,6 +21,9 @@
 	<!-- Custom CSS -->
 	<link href="<?= base_url('assets/css/custom/custom.css') ?>" rel="stylesheet"/>
 
+	<!-- ReCaptcha -->
+	<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+
 	<?php #$customCSS ?>
 </head>
 <body  class=" d-flex flex-column bodyBackground">
@@ -36,6 +39,27 @@
 					</p>
 					<h2 class="h1"><?= $email ?></h2>
 				</div>
+
+				<div class="mb-5">
+					<p class="fs-h3 text-muted w-100">
+						por favor insira o código de verificação que enviamos para o seu email:
+					</p>
+							
+					<div class="d-flex flex-col w-100 justify-content-around px-5 gap-5 mb-3">
+						<input name="code1" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+						<input name="code2" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+						<input name="code3" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+						<input name="code4" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+					</div>
+
+					<div id="recaptcha-container" class="g-recaptcha"
+						data-sitekey="<?= env('recaptcha.siteKey') ?>"
+						data-size="invisible">
+					</div>
+
+					<button class="btn btn-primary w-50 btnValidar" type="button" name="btnValidar">validar</button>
+				</div>
+
 				<div class="text-center text-muted mt-3">
 					não encontra o email? procure no spam!<br />
 					email errado? por favor <a href="<?= base_url("auth/recoverPassword") ?>">insira o email correto</a>.
@@ -57,9 +81,22 @@
 
 <script> 
 	const baseURL = "<?= base_url() ?>";
+
+	let recaptchaReady = false;
+	let recaptchaWidgetId;
+
+	// Initialize reCAPTCHA
+	function onRecaptchaLoad() {
+		recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+			sitekey: '<?= env('recaptcha.siteKey') ?>',
+			size: 'invisible',
+			badge: 'bottomright' // Position for invisible recaptcha
+		});
+		recaptchaReady = true;
+	}
 </script>
 
-<?php #$customJS ?>
+<script src="<?= base_url('assets/js/custom/auth.js?' . $_ENV['VERSION']) ?>"></script>
 
 </body>
 </html>
