@@ -134,25 +134,6 @@
                         <h3>Personalization</h3>
 
                         <div class="row mb-5">
-                            <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">primary color</label>
-                            </div>
-
-                            <div class="col-sm-1 d-flex align-items-end">
-                                <input type="color" name="primaryColor" id="primaryColorPicker" class="form-control form-control-color">
-                            </div>
-                            
-                            <div class="w-100 d-block mb-3"></div>
-
-                            <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">secondary color</label>
-                            </div>
-
-                            <div class="col-sm-1 d-flex align-items-end">
-                                <input type="color" name="secondaryColor" id="secondaryColorPicker" class="form-control form-control-color">
-                            </div>
-
-                            <div class="w-100 d-block mb-3"></div>
 
                             <div class="col-sm-2 d-flex align-items-center">
                                 <label class="form-label m-0">color scheme</label>
@@ -177,12 +158,6 @@
                         <div class="row">
                             <div class="col-sm-2 d-flex align-items-end">
                                 <button class="btn btn-danger btn-w1" name="deleteAccountButton">delete account</button>
-                            </div>
-                            
-                            <div class="w-100 d-block mb-3"></div>
-
-                            <div class="col-sm-2 d-flex align-items-end">
-                                <a class="btn btn-danger btn-w1" href="<?= base_url('auth/logout') ?>">logout</a>
                             </div>
                         </div>
                     </div>

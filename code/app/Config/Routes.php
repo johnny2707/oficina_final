@@ -70,6 +70,7 @@ $routes->group('vehicles', ['filter' => 'authGuard|permissionsValidation: VEHICL
     $routes->get('getUserVehicles',                         'Vehicles::getUserVehicles');
     $routes->post('getVehicleByLicensePlate',               'Vehicles::getVehicleByLicensePlate');
     $routes->get('getAllVehicles',                          'Vehicles::getAllVehicles');
+    $routes->post('getVehicleById',                         'Vehicles::getVehicleById');
 });
 
 //MECHANICS

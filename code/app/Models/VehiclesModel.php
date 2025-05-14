@@ -46,4 +46,11 @@ class VehiclesModel extends Model
 
         return $query->get()->getResultArray();
     }
+
+    public function getVehicleById($vehicle_id)
+    {
+        $query = $this->db->table($this->table)->select("*")->where('vehicle_id', $vehicle_id);
+
+        return $query->get()->getResultArray();
+    }
 }

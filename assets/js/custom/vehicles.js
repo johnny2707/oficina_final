@@ -6,16 +6,13 @@ $(document).ready(function() {
 
     $('#vehicleSelection').on('change', function(event) {
 
-        console.log('Changed!');
-        console.log($('#vehicleSelection').val());
-
         if($('#vehicleSelection').val() != "") {
             
             $.ajax({
                 type: "post",
-                url: `${baseURL}vehicles/getVehicleData`,
+                url: `${baseURL}vehicles/getVehicleById`,
                 data: {
-                    vehicleId: $('#vehicleSelection').val()
+                    vehicle_id: $('#vehicleSelection').val()
                 },
                 dataType: "json",
                 success: function(data) {
