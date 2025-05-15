@@ -32,20 +32,20 @@
 				</div>
 
 				<div class="card-body">
-					<p class="text-muted mb-4">insira o seu email para recuperar a palavra-passe.</p>
+					<p class="text-muted mb-4">Insira o seu email para recuperar a palavra-passe.</p>
 					<div class="mb-3">
 						<input class="form-control" type="text" name="email" placeholder="email">
 					</div>
 					<div class="form-footer">
 						<button type="button" class="btn btn-primary w-100 changePassword">
 							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
-							enviar email
+							Enviar email
 						</button>
 					</div>
 				</div>
 			</div>
 			<div class="text-center text-muted mt-3">
-				<a href="<?= base_url() ?>">voltar para a página de login</a>
+				<a href="<?= base_url() ?>">Voltar para a página de login</a>
 			</div>
 		</div>
 	</div>

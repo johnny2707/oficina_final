@@ -94,7 +94,7 @@
 
                                     <div class="w-100 d-block mb-3"></div>
                                 
-                                    <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Destrito <sup class="text-danger">*</sup></label></div>
+                                    <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Distrito <sup class="text-danger">*</sup></label></div>
                                     <div class="col-sm-3"><input type="text" name="clientCounty" class="form-control clientCounty"></div>
 
                                     <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Idioma</label></div>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-primary mt-5 registerClient" name="registerClient">registar cliente</button>
+                        <button type="button" class="btn btn-primary mt-5 registerClient" name="registerClient">Registar cliente</button>
                     </div>
                 </div>
             </div>

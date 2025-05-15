@@ -20,7 +20,7 @@
                 <div class="card rounded-4">
                     <div class="card-body bg-body-tertiary rounded-4">
                         <div class="form-group d-flex flex-row align-items-end gap-3 mb-3">
-                            <label for="" class="form-label">Search</label>
+                            <label for="" class="form-label">Procurar</label>
                             <input type="text" id="searchProduct" class="form-control">
                         </div>
                     

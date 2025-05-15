@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clock | johhny</title>
+    <title>Clock | johhny</title>
 
     <style>
         @font-face {

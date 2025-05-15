@@ -35,20 +35,20 @@
 
 				<div class="card-body">
 					<div class="mb-3">
-						<label class="form-label">password</label>
+						<label class="form-label">Palavra-Passe</label>
 						<input type="password" class="form-control" placeholder="password" name="password">
 					</div>
 					<div class="mb-2">
-						<label class="form-label">confirm password</label>
+						<label class="form-label">Confirmar Palavra-Passe</label>
 						<input type="password" class="form-control" placeholder="confirm password" autocomplete="off" name="passwordConfirm">
 					</div>
 					<div class="form-footer">
-						<button type="button" class="btn btn-primary w-100 saveNewPassword">save</a>
+						<button type="button" class="btn btn-primary w-100 saveNewPassword">Guardar</a>
 					</div>
 				</div>
 			</form>
 			<div class="text-center text-muted mt-3">
-				<a href="<?= base_url() ?>">go back to the login page</a>
+				<a href="<?= base_url() ?>">Voltar para a Página de Login</a>
 			</div>
 		</div>
 	</div>

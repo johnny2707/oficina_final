@@ -11,7 +11,7 @@
             <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
                     <a href="<?=base_url('users/create')?>" class="btn btn-primary">
-                        Criar novo utilizador
+                        Criar Novo Utilizador
                     </a>
                 </div>
             </div>
@@ -32,7 +32,6 @@
                                 <th>Email</th>
                                 <th>Grupo</th>
                                 <th>Estado</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

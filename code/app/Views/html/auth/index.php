@@ -44,18 +44,18 @@
 
 				<div class="card-body">
 					<div class="mb-3">
-						<label class="form-label">email</label>
+						<label class="form-label">Email</label>
 						<input type="text" class="form-control" placeholder="email" name="email">
 					</div>
 					<div class="mb-2">
-						<label class="form-label">palavra-passe</label>
+						<label class="form-label">Palavra-Passe</label>
 						<input type="password" class="form-control" placeholder="palavra-passe" name="password">
 					</div>
 					<div class="form-footer">
-						<a type="button" class="btn btn-primary w-100 authButton">entrar</a>
+						<a type="button" class="btn btn-primary w-100 authButton">Entrar</a>
 
 						<span class="form-label-description mt-4">
-							<a href="<?= base_url('auth/recoverPassword') ?>">esqueceu a palavra-passe?</a>
+							<a href="<?= base_url('auth/recoverPassword') ?>">Esqueceu a palavra-passe?</a>
 						</span>
 					</div>
 				</div>

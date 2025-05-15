@@ -4,7 +4,7 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-	<title>criação conta | oficina digital</title>
+	<title>Criação de Conta | oficina digital</title>
 
 	<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/img/logo.svg') ?>">
 
@@ -44,18 +44,18 @@
 
 				<div class="card-body">
 					<div class="mb-3">
-						<label class="form-label">palavra-passe</label>
+						<label class="form-label">Palavra-Passe</label>
 						<input type="password" class="form-control" placeholder="palavra-passe" name="accountCreationPassword">
 					</div>
 					<div class="mb-2">
-						<label class="form-label">confirmar palavra-passe</label>
+						<label class="form-label">Confirmar Palavra-Passe</label>
 						<input type="password" class="form-control" placeholder="confirmar palavra-passe" name="accountCreationPasswordConfirmation">
 					</div>
 					<div class="form-footer">
 						<button type="button" class="btn btn-primary w-100 createAccountButton" data-token="<?= $token ?>">criar conta</button>
 
 						<span class="form-label-description mt-4">
-							<a href="<?= base_url() ?>">já tem uma conta?</a>
+							<a href="<?= base_url() ?>">Já tem uma conta?</a>
 						</span>
 					</div>
 				</div>

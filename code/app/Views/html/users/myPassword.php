@@ -9,7 +9,7 @@
                 <div class="page-pretitle">
                     Utilizadores
                 </div>
-                <h2 class="page-title">Alterar password</h2>
+                <h2 class="page-title">Alterar Palavra-Passe</h2>
             </div>
         </div>
     </div>
@@ -24,19 +24,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Password antiga</label>
+                                    <label class="form-label">Palavra-Passe Antiga</label>
                                     <input type="password" class="form-control" name="old-password">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Nova password</label>
+                                    <label class="form-label">Nova Palavra-Passe</label>
                                     <input type="password" class="form-control" name="new-password">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Confirmar nova password</label>
+                                    <label class="form-label">Confirmar Nova Palavra-Passe</label>
                                     <input type="password" class="form-control" name="confirm-new-password">
                                 </div>
                             </div>

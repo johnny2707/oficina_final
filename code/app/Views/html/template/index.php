@@ -62,7 +62,7 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-house-fill"></i>	
 							</span>
-							<span class="nav-link-title">HOME</span>
+							<span class="nav-link-title">INÍCIO</span>
 						</a>
 					</li>
 					<li class="nav-item <?= isset($menu) && $menu == 'ACCOUNT' ? 'active' : '' ?>">
@@ -70,7 +70,7 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-person-circle"></i>
 							</span>
-							<span class="nav-link-title">ACCOUNT</span>
+							<span class="nav-link-title">CONTA</span>
 						</a>
 					</li>
 					<li class="nav-item dropdown <?= (isset($menu) && $menu == 'VEHICLE') ? 'active' : '' ?>">
@@ -78,7 +78,7 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-car-front-fill"></i>
 							</span>
-							<span class="nav-link-title">MY VEHICLE</span>
+							<span class="nav-link-title">O MEU VEÍCULO</span>
 						</a>
 						<div class="dropdown-menu">
 							<?php if (in_array('VEHICLE', $permissions) || in_array('ALL', $permissions)) : ?>
@@ -96,7 +96,7 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-people-fill"></i>
 							</span>
-							<span class="nav-link-title">COSTUMERS</span>
+							<span class="nav-link-title">CLIENTES</span>
 						</a>
 						<div class="dropdown-menu">
 							<?php if (in_array('CLIENTS', $permissions) || in_array('ALL', $permissions)) : ?>
@@ -110,7 +110,7 @@
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-calendar-event-fill"	></i>
 							</span>
-							<span class="nav-link-title">CALENDAR</span>
+							<span class="nav-link-title">CALENDÁRIO</span>
 						</a>
 						<div class="dropdown-menu">
 							<?php if (in_array('SCHEDULE', $permissions) || in_array('ALL', $permissions)) : ?>
@@ -119,20 +119,26 @@
 							<?php endif; ?>
 						</div>
 					</li>
-					<li class="nav-item dropdown <?= isset($menu) && $menu == 'SERVICES' ? 'active' : '' ?>">
-						<a href="<?= base_url('services/index') ?>" class="nav-link" >
+					<li class="nav-item dropdown <?= isset($menu) && $menu == 'STOCK' ? 'active' : '' ?>">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-file-earmark-text-fill"></i>
 							</span>
-							<span class="nav-link-title">SERVICE</span>
+							<span class="nav-link-title">SERVIÇOS</span>
 						</a>
+						<div class="dropdown-menu">
+							<?php if (in_array('SERVICES', $permissions) || in_array('ALL', $permissions)) : ?>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('services/create') ?>">CRIAR SERVIÇO</a>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'INTERVENTION' ? 'active' : '' ?>" href="<?= base_url('services/index') ?>">NOVA INTERVENÇÃO</a>
+							<?php endif; ?>
+						</div>
 					</li>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'STOCK' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-box-fill"></i>
 							</span>
-							<span class="nav-link-title">STOCK</span>
+							<span class="nav-link-title">PRODUTOS</span>
 						</a>
 						<div class="dropdown-menu">
 							<?php if (in_array('STOCK', $permissions) || in_array('ALL', $permissions)) : ?>
@@ -141,33 +147,13 @@
 							<?php endif; ?>
 						</div>
 					</li>
-					<li class="nav-item dropdown <?= isset($menu) && $menu == 'FATURA' ? 'active' : '' ?>">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+					<li class="nav-item dropdown <?= isset($menu) && $menu == 'PERSONALIZATION' ? 'active' : '' ?>">
+						<a href="<?= base_url('personalization/index') ?>" class="nav-link" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="bi bi-receipt"></i>
+								<i class="bi bi-pencil-fill"></i>
 							</span>
-							<span class="nav-link-title">RECEIPTS</span>
+							<span class="nav-link-title">PERSONALIZAÇÃO</span>
 						</a>
-						<div class="dropdown-menu">
-							<?php if (in_array('FATURA', $permissions) || in_array('ALL', $permissions)) : ?>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'DIRECT CREATION' ? 'active' : '' ?>" href="<?= base_url('fatura/faturaDireta') ?>">FATURA DIRETA</a>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('fatura/fatura') ?>">FATURA</a>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'HISTORY' ? 'active' : '' ?>" href="<?= base_url('fatura/history') ?>">HISTÓRICO</a>
-							<?php endif; ?>
-						</div>
-					</li>
-					<li class="nav-item dropdown <?= isset($menu) && $menu == 'OTHERS' ? 'active' : '' ?>">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-							<span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i class="bi bi-gear-fill"></i>
-							</span>
-							<span class="nav-link-title">OTHERS</span>
-						</a>
-						<div class="dropdown-menu">
-							<?php if (in_array('OTHERS', $permissions) || in_array('ALL', $permissions)) : ?>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'OTHER' ? 'active' : '' ?>" href="<?= base_url() ?>">QUALQUER COISA</a>
-							<?php endif; ?>
-						</div>
 					</li>
             	</ul>
           	</div>

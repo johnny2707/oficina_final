@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label class="form-label">Nome de utilizador</label>
+                                    <label class="form-label">Nome de Utilizador</label>
                                     <input type="text" class="form-control" name="username" value="<?=$username?>">
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label class="form-label">Grupo de permissões</label>
+                                    <label class="form-label">Grupo de Permissões</label>
                                     <select class="form-select select-role" name="role" autocomplete="off">
                                         <option value="" selected>Selecione uma opção</option>
                                         <?php foreach ($allRoles as $roles) : ?>

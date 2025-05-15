@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="inputAddress" class="form-label">Type</label>
+                                        <label for="inputAddress" class="form-label">Tipo</label>
                                         <input type="text" class="form-control selectServiceType" id="selectServiceType" placeholder="Type">
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="clientName" class="form-label">Name</label>
+                                    <label for="clientName" class="form-label">Nome</label>
                                     <input type="text" class="form-control clientName" id="clientName" placeholder="name">
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label for="clientAddress" class="form-label">Address</label>
+                                    <label for="clientAddress" class="form-label">Morada</label>
                                     <input type="text" class="form-control clientAddress" id="selectVehicle" placeholder="address">
                                 </div>
                             </div>
@@ -144,13 +144,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="clientCity" class="form-label">City</label>
+                                    <label for="clientCity" class="form-label">CIdade</label>
                                     <input type="text" class="form-control clientCity" id="clientCity" placeholder="city">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="clientPostCode" class="form-label">Post Code</label>
+                                    <label for="clientPostCode" class="form-label">Código Postal</label>
                                     <input type="text" class="form-control clientPostCode" id="clientPostCode" placeholder="post code">
                                 </div>
                             </div>
@@ -158,13 +158,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="clientCounty" class="form-label">County</label>
+                                    <label for="clientCounty" class="form-label">Distrito</label>
                                     <input type="text" class="form-control clientCounty" id="clientCounty" placeholder="county">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="clientCountry" class="form-label">Country</label>
+                                    <label for="clientCountry" class="form-label">País</label>
                                     <input type="text" class="form-control clientCountry" id="clientCountry" placeholder="country">
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="clientPhoneNumber" class="form-label">Phone Number</label>
+                                    <label for="clientPhoneNumber" class="form-label">Telemóvel</label>
                                     <input type="text" class="form-control clientPhoneNumber" id="clientPhoneNumber" placeholder="phone number">
                                 </div>
                             </div>
@@ -196,13 +196,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="vehicleBrand" class="form-label">Brand</label>
+                                    <label for="vehicleBrand" class="form-label">Marca</label>
                                     <input type="text" class="form-control vehicleBrand" id="vehicleBrand" placeholder="brand">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="vehicleModel" class="form-label">Model</label>
+                                    <label for="vehicleModel" class="form-label">Modelo</label>
                                     <input type="text" class="form-control vehicleModel" id="vehicleModel" placeholder="model">
                                 </div>
                             </div>
@@ -210,7 +210,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="vehicleYear" class="form-label">Year</label>
+                                    <label for="vehicleYear" class="form-label">Ano</label>
                                     <input type="text" class="form-control vehicleYear" id="vehicleYear" placeholder="year">
                                 </div>
                             </div>
@@ -242,14 +242,14 @@
                         <div class="row">
                             
                             <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">Mechanic</label>
+                                <label class="form-label">Mecânico</label>
                             </div>
                             <div class="col-sm-4 d-flex align-items-end">
                                 <input type="text" id="selectMechanic" name="mechanicNumber" class="form-control">
                             </div>
 
                             <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">Date</label>
+                                <label class="form-label">Data</label>
                             </div>
                             <div class="col-sm-4 d-flex align-items-end">
                                 <input type="date" id="eventDate" name="eventDate" class="form-control">
@@ -258,23 +258,16 @@
                             <div class="w-100 d-block mb-3"></div>
 
                             <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">Start</label>
+                                <label class="form-label">Começo</label>
                             </div>
                             <div class="col-sm-4 d-flex align-items-end">
                                 <input type="time" id="eventStart" name="eventStart" class="form-control">
                             </div>
 
-                            <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">End</label>
-                            </div>
-                            <div class="col-sm-4 d-flex align-items-end">
-                                <input type="time" id="eventEnd" name="eventEnd" class="form-control">
-                            </div>
-
                             <div class="w-100 d-block mb-3"></div>
 
                             <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">Description</label>
+                                <label class="form-label">Descrição</label>
                             </div>
                             <div class="col-sm-10 d-flex align-items-end">
                                 <input type="text" id="eventDescription" name="eventDescription" class="form-control">
@@ -283,7 +276,7 @@
                             <div class="w-100 d-block mb-3"></div>
 
                             <div class="col-sm-2 d-flex align-items-end">
-                                <label class="form-label">Observations</label>
+                                <label class="form-label">Observações</label>
                             </div>
                             <div class="col-sm-10 d-flex align-items-end">
                                 <textarea type="text" id="eventObservations" name="eventObservations" class="form-control" style="min-height: 5rem; field-sizing: content;"></textarea>
@@ -319,7 +312,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary w-100 mt-5">criar</button>
+                <button type="button" class="btn btn-primary w-100 mt-5">Criar</button>
             </div>
         </div>
     </div>

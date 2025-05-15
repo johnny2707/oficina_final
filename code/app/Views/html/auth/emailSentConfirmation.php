@@ -22,7 +22,7 @@
 	<link href="<?= base_url('assets/css/custom/custom.css') ?>" rel="stylesheet"/>
 
 	<!-- ReCaptcha -->
-	<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+	<!-- <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script> -->
 
 	<?php #$customCSS ?>
 </head>
@@ -40,29 +40,9 @@
 					<h2 class="h1"><?= $email ?></h2>
 				</div>
 
-				<div class="mb-5">
-					<p class="fs-h3 text-muted w-100">
-						por favor insira o código de verificação que enviamos para o seu email:
-					</p>
-							
-					<div class="d-flex flex-col w-100 justify-content-around px-5 gap-5 mb-3">
-						<input name="code1" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-						<input name="code2" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-						<input name="code3" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-						<input name="code4" class="form-control w-25 py-3 text-center" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-					</div>
-
-					<div id="recaptcha-container" class="g-recaptcha"
-						data-sitekey="<?= env('recaptcha.siteKey') ?>"
-						data-size="invisible">
-					</div>
-
-					<button class="btn btn-primary w-50 btnValidar" type="button" name="btnValidar">validar</button>
-				</div>
-
 				<div class="text-center text-muted mt-3">
-					não encontra o email? procure no spam!<br />
-					email errado? por favor <a href="<?= base_url("auth/recoverPassword") ?>">insira o email correto</a>.
+					Não encontra o email? Procure no spam!<br />
+					Email errado? Por favor <a href="<?= base_url("auth/recoverPassword") ?>">insira o email correto</a>.
 				</div>
 			</div>
 		</div>
@@ -79,7 +59,7 @@
 <!-- Custom JS -->
 <script src="<?= base_url('assets/js/custom/custom.js') ?>"></script>
 
-<script> 
+<!-- <script> 
 	const baseURL = "<?= base_url() ?>";
 
 	let recaptchaReady = false;
@@ -94,7 +74,7 @@
 		});
 		recaptchaReady = true;
 	}
-</script>
+</script> -->
 
 <script src="<?= base_url('assets/js/custom/auth.js?' . $_ENV['VERSION']) ?>"></script>
 
