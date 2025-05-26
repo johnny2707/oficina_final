@@ -134,11 +134,9 @@ class Auth extends BaseController
 
     public function SendPasswordRecoveryEmail()
     {
-        $code = generateRandomCode();
-
         $userEmail = $this->request->getPost('email');
 
-        $emailBody = view('html/auth/emailTemplate', ['email' => $userEmail, 'code' => $code]);
+        $emailBody = view('html/auth/emailTemplate', ['email' => $userEmail]);
 
         $this->email->setMailType('html');
 
@@ -177,6 +175,7 @@ class Auth extends BaseController
     public function UpdatePassword()
     {
         $password = $this->request->getPost('password');
+        $passwordConfirm = $this->request->getPost('passwordConfirm');
         $email = $this->request->getPost('email');
         
         $validationRules = [
@@ -196,7 +195,7 @@ class Auth extends BaseController
 
             foreach ($validationRules as $field => $rules) {
                 if ($this->validation->getError($field)) {
-                    array_push($this->res['popUpMessages'], "The field <b>{$rules['label']}</b> has errors!");
+                    array_push($this->res['popUpMessages'], "O campo <b>{$rules['label']}</b> tem erros!");
                 }
             }
         }
@@ -207,7 +206,7 @@ class Auth extends BaseController
             $this->usersModel->updateUser($userData[0]['user_id'], ['user_password' => password_hash($password, PASSWORD_DEFAULT)]);
 
             $this->logsModel->log([
-                'log_third_party_id' => $this->session->get('id'),
+                'log_third_party_id' => $userData[0]['user_id'],
                 'log_type' => 'password_change',
                 'log_description' => 'User changed password',
                 'log_date' => date('Y-m-d H:i:s')

@@ -147,117 +147,148 @@ $(document).ready(function () {
         clientsTable.search(this.value).draw();
     });
 
-    var contacts = [];
-    var contactsOptions = [];
+   var contacts = [];
+var vehicles = [];
+var selectContact, selectVehicle;
 
-    var vehicles = [];
-    var vehiclesOptions = [];
+$(document).on('click', '.consultarButton', function(e) {
+    let codigo = $(this).data('code');
+    console.log(codigo);
 
-    var selectContact = new TomSelect('#selectContacto', {
-        options: [],
-        maxItems: 1, 
-        dropdownClass: 'dropdown-menu ts-dropdown',
-        optionClass: 'dropdown-item',
-        dropdownParent: 'body',
-        // onChange: () => {
-        //     const selectedId = parseInt(this.value); // Get the selected contact ID
-        //     const selectedContact = contacts.find(contact => contact.id === selectedId);
+    $.ajax({
+        type: "post",
+        url: `${baseURL}clients/getClientInfoByCode`,
+        data: {
+            'client_code': codigo
+        },
+        dataType: "json",
+        success: function (response) {
+            console.log("Response received:", response);
 
-        //     if (selectedContact) {
-        //         // Fill the input fields with the selected contact's details
-        //         document.getElementById("name").value = selectedContact.name;
-        //         document.getElementById("email").value = selectedContact.email;
-        //         document.getElementById("phone").value = selectedContact.phone;
-        //     } else {
-        //         // Clear the input fields if no contact is selected
-        //         document.getElementById("name").value = "";
-        //         document.getElementById("email").value = "";
-        //         document.getElementById("phone").value = "";
-        //     }
-        // }
-    });
+            // Fill client data
+            $('.checkClientCode').val(response['client']['client_code']);
+            $('.checkClientName').val(response['client']['client_name']);
+            $('.checkClientNif').val(response['client']['client_nif']);
+            $('.checkClientAddress').val(response['client']['client_address']);
+            $('.checkClientCity').val(response['client']['client_city']);
+            $('.checkClientPostCode').val(response['client']['client_post_code']);
+            $('.checkClientCountry').val(response['client']['client_country']);
+            $('.checkClientCounty').val(response['client']['client_county']);
+            $('.checkClientLanguage').val(response['client']['client_language']);
+            $('.checkClientObservations').val(response['client']['client_observations']);
 
-    var selectVehicle = new TomSelect('#selectVehicle', {
-        options: [],
-        maxItems: 1, 
-        dropdownClass: 'dropdown-menu ts-dropdown',
-        optionClass: 'dropdown-item',
-        dropdownParent: 'body',
-        // onChange: () => {
-        //     const selectedId = parseInt(this.value); // Get the selected contact ID
-        //     const selectedContact = contacts.find(contact => contact.id === selectedId);
+            // Clear existing data
+            contacts = [];
+            vehicles = [];
 
-        //     if (selectedContact) {
-        //         // Fill the input fields with the selected contact's details
-        //         document.getElementById("name").value = selectedContact.name;
-        //         document.getElementById("email").value = selectedContact.email;
-        //         document.getElementById("phone").value = selectedContact.phone;
-        //     } else {
-        //         // Clear the input fields if no contact is selected
-        //         document.getElementById("name").value = "";
-        //         document.getElementById("email").value = "";
-        //         document.getElementById("phone").value = "";
-        //     }
-        // }
-    });
+            // Destroy existing TomSelect instances if they exist
+            if (selectContact) {
+                selectContact.destroy();
+                selectContact = null;
+            }
+            if (selectVehicle) {
+                selectVehicle.destroy();
+                selectVehicle = null;
+            }
 
-
-    $(document).on('click', '.consultarButton', function(e) {
-
-        let codigo = $(this).data('code');
-
-        console.log(codigo);
-    
-        $.ajax({
-            type: "post",
-            url: `${baseURL}clients/getClientInfoByCode`,
-            data: {
-                'client_code': codigo
-            },
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-
-                $('.clientCode').val(response['client']['client_code']);
-                $('.clientName').val(response['client']['client_name']);
-                $('.clientNif').val(response['client']['client_nif']);
-                $('.clientAddress').val(response['client']['client_address']);
-                $('.clientCity').val(response['client']['client_city']);
-                $('.clientPostCode').val(response['client']['client_post_code']);
-                $('.clientCountry').val(response['client']['client_country']);
-                $('.clientCounty').val(response['client']['client_county']);
-                $('.clientLanguage').val(response['client']['client_language']);
-                $('.clientObservations').val(response['client']['client_observations']);
-
-
+            // Process contacts and create TomSelect
+            let contactsOptions = [];
+            if (response['contacts'] && response['contacts'].length > 0) {
                 response['contacts'].forEach(element => {
                     contacts.push(element);
-
-                    var item = {value: element.contact_id, text: element.contact_description};
-                    contactsOptions.push(item);
+                    contactsOptions.push({
+                        value: element.contact_id.toString(),
+                        text: element.contact_description || `Contact ${element.contact_id}`
+                    });
                 });
 
-                console.log("contact options: ")
-                console.log(contactsOptions)
+                console.log("Creating contact TomSelect with options:", contactsOptions);
 
-                selectContact.clearOptions();
-                selectContact.addOptions(contactsOptions);
-                selectContact.sync();
+                // Create contact TomSelect with data
+                selectContact = new TomSelect('#checkSelectContacto', {
+                    options: contactsOptions,
+                    maxItems: 1,
+                    dropdownClass: 'dropdown-menu ts-dropdown',
+                    optionClass: 'dropdown-item',
+                    dropdownParent: 'body',
+                    placeholder: 'Select a contact...',
+                    onChange: function(value) {
+                        console.log("Contact selected:", value);
+                        if (!value) return;
+                        
+                        const selectedId = parseInt(value);
+                        const selectedContact = contacts.find(contact => contact.contact_id === selectedId);
+                        console.log("Found contact:", selectedContact);
 
+                        if (selectedContact) {
+                            // Update based on your actual contact data structure
+                            document.getElementById("name").value = selectedContact.contact_name || '';
+                            document.getElementById("email").value = selectedContact.contact_email || '';
+                            document.getElementById("phone").value = selectedContact.contact_phone || '';
+                        } else {
+                            document.getElementById("name").value = "";
+                            document.getElementById("email").value = "";
+                            document.getElementById("phone").value = "";
+                        }
+                    }
+                });
+            } else {
+                console.log("No contacts found in response");
+            }
+
+            // Process vehicles and create TomSelect
+            let vehiclesOptions = [];
+            if (response['vehicles'] && response['vehicles'].length > 0) {
                 response['vehicles'].forEach(element => {
                     vehicles.push(element);
-                    vehiclesOptions.push({value: element.vehicle_id, text: element.vehicle_license_plate});
+                    vehiclesOptions.push({
+                        value: element.vehicle_id.toString(),
+                        text: element.vehicle_license_plate || `Vehicle ${element.vehicle_id}`
+                    });
                 });
 
-                selectVehicle.clearOptions();
-                selectVehicle.addOptions(vehiclesOptions);
-                selectVehicle.sync();
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
+                console.log("Creating vehicle TomSelect with options:", vehiclesOptions);
+
+                // Create vehicle TomSelect with data
+                selectVehicle = new TomSelect('#selectVehicle', {
+                    options: vehiclesOptions,
+                    maxItems: 1,
+                    dropdownClass: 'dropdown-menu ts-dropdown',
+                    optionClass: 'dropdown-item',
+                    dropdownParent: 'body',
+                    placeholder: 'Select a vehicle...',
+                    onChange: function(value) {
+                        console.log("Vehicle selected:", value);
+                        if (!value) return;
+                        
+                        const selectedId = parseInt(value);
+                        const selectedVehicle = vehicles.find(vehicle => vehicle.vehicle_id === selectedId);
+                        console.log("Found vehicle:", selectedVehicle);
+
+                        if (selectedVehicle) {
+                            // Update these field IDs to match your actual form
+                            document.getElementById("vehicleName").value = selectedVehicle.vehicle_name || '';
+                            document.getElementById("vehiclePlate").value = selectedVehicle.vehicle_license_plate || '';
+                            document.getElementById("vehicleModel").value = selectedVehicle.vehicle_model || '';
+                        } else {
+                            document.getElementById("vehicleName").value = "";
+                            document.getElementById("vehiclePlate").value = "";
+                            document.getElementById("vehicleModel").value = "";
+                        }
+                    }
+                });
+            } else {
+                console.log("No vehicles found in response");
             }
-        });
+
+            console.log("TomSelect instances created successfully");
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX Error:");
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
     });
+});
 });

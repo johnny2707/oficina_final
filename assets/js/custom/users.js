@@ -48,13 +48,12 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('click', '.saveNewPassword', function(e){
+    $(document).on('click', '.saveNewPasswordButton', function(e){
 
         $.ajax({
             type: "post",
-            url: `${baseURL}users/createAccount`,
+            url: `${baseURL}users/updatePassword`,
             data: {
-                token,
                 password,
                 passwordConfirmation
             },
@@ -81,50 +80,6 @@ $(document).ready(function () {
                 notyf.error('Ocorreu um erro. Atualize a página e tente novamente!');
             }
         });
-    });
-
-    $(document).on('click', '.saveNewEmail', function(e){
-
-        let NewEmail = $('.saveNewEmailModalInput').val();
-        let OldEmail = $('.userEmail').val();
-
-        if(NewEmail == "") {
-            notyf.error('Introduza um email!');
-        }
-        else if(NewEmail == OldEmail) {
-            notyf.error('O email introduzido é igual ao atual!');
-        }
-        else {
-            $.ajax({
-                type: "post",
-                url: `${baseURL}users/changeEmail`,
-                data: {
-                    NewEmail
-                },
-                dataType: "json",
-                success: function (data) {
-                    if (data.error == true) {
-                        $.each(data.popUpMessages, function(key, value) {
-                            notyf.error(value);
-                        });
-                    } 
-                    else {
-                        $.each(data.popUpMessages, function(key, value) {
-                            notyf.success(value);
-                        });
-                        
-                        $(".userEmail").val(NewEmail);
-                    }
-                },
-                error: function(xhr, status, error){
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
-
-                    notyf.error('Ocorreu um erro. Atualize a página e tente novamente!');
-                }
-            });
-        }        
     });
 
     $(document).on('click', '.saveNewUsername', function(e){

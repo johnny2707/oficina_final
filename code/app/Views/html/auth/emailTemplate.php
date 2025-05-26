@@ -154,7 +154,7 @@
                                 <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
                                 <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Enviámos este email para poder recuperar a sua palavra-passe. Se não pediu esta recuperação por favor ignore este email.</span></p>
                                 <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
-                                <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Para proceder com a recuperação por favor insira o código abaixo:</span></p>
+                                <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 18px; line-height: 25.2px; color: #666666;">Para proceder com a recuperação por favor clique no link abaixo:</span></p>
                               </div>
 
                             </td>
@@ -164,7 +164,7 @@
 
                       
                       <div style="width: 100%; text-align: center;">
-                        <span style=" font-weight: bold; font-size: 80px;"><?= $code ?></span>
+                        <a href="<?= base_url('auth/newPassword/'.$email); ?>" style="text-decoration: none; padding: 16px 32px; color: #fafafa; background-color: #CD5C08;">Recuperar Palavra-Passe</a>
                       </div>
                       
 
