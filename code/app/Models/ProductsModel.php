@@ -48,4 +48,16 @@ class ProductsModel extends Model
         
         return $query->getResultArray();
     }
+
+
+    public function getLowStockProducts($threshold = 5)
+    {
+        $query = $this->db->table('tb_products')
+                          ->select('product_id, product_code, product_description, product_stock, unit_description AS product_unit')
+                          ->join('tb_units', 'product_unit_id = unit_id')
+                          ->where('product_stock <=', $threshold)
+                          ->get();
+
+        return $query->getResultArray();
+    }
 }

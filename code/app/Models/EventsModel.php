@@ -65,4 +65,15 @@ class EventsModel extends Model
                                                
         return $query->get()->getResultArray();
     }
+
+
+    public function getDailyEventInfo()
+    {
+        $today = Time::now()->format('Y-m-d');
+        $query = $this->db->table('tb_events')->select('event_id, event_date, event_vehicle_license_plate')
+                                              ->where("DATE(event_date) =", $today)
+                                              ->get();
+        
+        return $query->getResultArray();
+    }
 }

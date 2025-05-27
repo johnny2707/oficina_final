@@ -65,6 +65,7 @@
 							<span class="nav-link-title">INÍCIO</span>
 						</a>
 					</li>
+					<?php if (in_array('ACCOUNT', $permissions) || in_array('ALL', $permissions)) : ?>
 					<li class="nav-item <?= isset($menu) && $menu == 'ACCOUNT' ? 'active' : '' ?>">
 						<a href="<?= base_url('users') ?>" class="nav-link">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -73,6 +74,8 @@
 							<span class="nav-link-title">CONTA</span>
 						</a>
 					</li>
+					<?php endif; ?>
+					<?php if (in_array('VEHICLE', $permissions) || in_array('ALL', $permissions)) : ?>
 					<li class="nav-item dropdown <?= (isset($menu) && $menu == 'VEHICLE') ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -81,16 +84,18 @@
 							<span class="nav-link-title">O MEU VEÍCULO</span>
 						</a>
 						<div class="dropdown-menu">
-							<?php if (in_array('VEHICLE', $permissions) || in_array('ALL', $permissions)) : ?>
+							
 								<a class="dropdown-item <?= (isset($subMenu) && $subMenu == 'MY_VEHICLE') ? 'active' : '' ?>" href="<?= base_url('vehicles/myVehicle') ?>">
 									O MEU VEÍCULO
 								</a>
 								<a class="dropdown-item <?= (isset($subMenu) && $subMenu == 'HISTORIC') ? 'active' : '' ?>" href="<?= base_url('vehicles/historic') ?>">
 									HISTÓRICO DE REPARAÇÕES
 								</a>
-							<?php endif; ?>
+							
 						</div>
 					</li>
+					<?php endif; ?>
+					<?php if (in_array('CLIENTS', $permissions) || in_array('ALL', $permissions)) : ?>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'CLIENTS' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -99,12 +104,12 @@
 							<span class="nav-link-title">CLIENTES</span>
 						</a>
 						<div class="dropdown-menu">
-							<?php if (in_array('CLIENTS', $permissions) || in_array('ALL', $permissions)) : ?>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'LIST' ? 'active' : '' ?>" href="<?= base_url('clients/list') ?>">LISTA CLIENTES</a>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('clients/create') ?>">CRIAR CLIENTE</a>
-							<?php endif; ?>
 						</div>
 					</li>
+					<?php endif; ?>
+					<?php if (in_array('SCHEDULE', $permissions) || in_array('ALL', $permissions)) : ?>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'SCHEDULE' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -113,13 +118,13 @@
 							<span class="nav-link-title">CALENDÁRIO</span>
 						</a>
 						<div class="dropdown-menu">
-							<?php if (in_array('SCHEDULE', $permissions) || in_array('ALL', $permissions)) : ?>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CALENDAR' ? 'active' : '' ?>" href="<?= base_url('calendar/index') ?>">CALENDÁRIO</a>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'LIST' ? 'active' : '' ?>" href="<?= base_url('calendar/list') ?>">LISTA DE EVENTOS</a>
-							<?php endif; ?>
 						</div>
 					</li>
-					<li class="nav-item dropdown <?= isset($menu) && $menu == 'STOCK' ? 'active' : '' ?>">
+					<?php endif; ?>
+					<?php if (in_array('SERVICES', $permissions) || in_array('ALL', $permissions)) : ?>
+					<li class="nav-item dropdown <?= isset($menu) && $menu == 'SERVICES' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i class="bi bi-file-earmark-text-fill"></i>
@@ -127,12 +132,12 @@
 							<span class="nav-link-title">SERVIÇOS</span>
 						</a>
 						<div class="dropdown-menu">
-							<?php if (in_array('SERVICES', $permissions) || in_array('ALL', $permissions)) : ?>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('services/create') ?>">CRIAR SERVIÇO</a>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'INTERVENTION' ? 'active' : '' ?>" href="<?= base_url('services/index') ?>">NOVA INTERVENÇÃO</a>
-							<?php endif; ?>
 						</div>
 					</li>
+					<?php endif; ?>
+					<?php if (in_array('STOCK', $permissions) || in_array('ALL', $permissions)) : ?>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'STOCK' ? 'active' : '' ?>">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -141,12 +146,12 @@
 							<span class="nav-link-title">PRODUTOS</span>
 						</a>
 						<div class="dropdown-menu">
-							<?php if (in_array('STOCK', $permissions) || in_array('ALL', $permissions)) : ?>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('stock/criarProduto') ?>">CRIAR PRODUTO</a>
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'LIST' ? 'active' : '' ?>" href="<?= base_url('stock/index') ?>">STOCK</a>
-							<?php endif; ?>
 						</div>
 					</li>
+					<?php endif; ?>
+					<?php if (in_array('PERSONALIZATION', $permissions) || in_array('ALL', $permissions)) : ?>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'PERSONALIZATION' ? 'active' : '' ?>">
 						<a href="<?= base_url('personalization/index') ?>" class="nav-link" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -155,6 +160,7 @@
 							<span class="nav-link-title">PERSONALIZAÇÃO</span>
 						</a>
 					</li>
+					<?php endif; ?>
 					<li class="nav-item dropdown <?= isset($menu) && $menu == 'SAIR' ? 'active' : '' ?>">
 						<a href="<?= base_url('auth/logout') ?>" class="nav-link" >
 							<span class="nav-link-icon d-md-none d-lg-inline-block">

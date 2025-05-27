@@ -55,4 +55,31 @@ class Services extends BaseController
 
         return view('html/services/create', $this->data);
     }
+
+    public function createService() 
+    {
+        $service = $this->request->getPost();
+
+        if (empty($service['name']) || empty($service['price'])) {
+            $this->res['error'] = TRUE;
+            $this->res['popUpMessages'][] = 'Por favor, preencha todos os campos obrigatórios.';
+            return $this->response->setJSON($this->res);
+        }
+
+        $code = $this->servicesModel->getLastServiceNumber();
+        $code = $code ? $code['code'] + 1 : 1;
+        $service['service_code'] = str_pad($code, 5, '0', STR_PAD_LEFT);
+
+        $service['created_at'] = Time::now('Europe/Lisbon')->toDateTimeString();
+
+        $products = $service['products'] ?? [];
+        unset($service['products']);
+
+        $serviceID = $this->servicesModel->insert($service);
+
+        $this->servicesModel->insertProducts($products, $serviceID);
+               
+
+        return $this->response->setJSON($this->res);
+    }
 }

@@ -227,6 +227,59 @@ $(document).ready(function () {
         }
     });
 
+    $('#createServiceBtn').on('click', function() {
+        const serviceData = {
+            service_name: $('#serviceName').val(),
+            service_price: $('#servicePrice').val(),
+            service_description: $('#serviceDescription').val(),
+            service_duration: $('#serviceDuration').val(),
+            service_status: $('#serviceStatus').val(),
+            products: []
+        };
+
+        // Collect all products
+        $('.product-row').each(function() {
+            const productData = {
+                product_id: $(this).find('.product-select').val(),
+                product_quantity: $(this).find('.product-quantity').val()
+            };
+            if (productData.product_id && productData.quantity) {
+                serviceData.products.push(productData);
+            }
+        });
+
+        // Validation
+        if (!serviceData.service_name || !serviceData.service_price || 
+            !serviceData.service_description || !serviceData.service_duration || 
+            !serviceData.service_status) {
+            notyf.error('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
+        $.ajax({
+            type: "post",
+            url: `${baseURL}services/createService`,
+            data: serviceData,
+            dataType: "json",
+            success: function(response) {
+                if (response.success) {
+                    notyf.success('Serviço criado com sucesso!');
+                    // Reset form
+                    $('#serviceName, #servicePrice, #serviceDescription, #serviceDuration, #serviceStatus').val('');
+                    $('.product-row').remove();
+                } else {
+                    notyf.error('Erro ao criar serviço.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+                notyf.error('Ocorreu um erro. Tente novamente!');
+            }
+        });
+    });
+
     $(".ts-dropdown").css("z-index", "9999");
     
 });

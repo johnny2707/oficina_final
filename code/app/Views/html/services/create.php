@@ -90,14 +90,17 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('<?= base_url('products/getAllProducts') ?>')
         .then(response => response.json())
         .then(data => {
-
             data.forEach(element => {
                 console.log(element);
-
-                var newItem = {value: element.product_id, text: element.product_description}
+                
+                // Fixed: Match the field names with TomSelect configuration
+                var newItem = {
+                    id: element.product_id,           // Changed from 'value' to 'id'
+                    name: element.product_description  // Changed from 'text' to 'name'
+                };
                 productsData.push(newItem);
             });
-
+            console.log('Products loaded:', productsData);
         })
         .catch(error => {
             console.error('Error loading products:', error);
@@ -117,9 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="col-md-3">
                 <input type="number" step="0.01" class="form-control" name="products[${productIndex}][quantity]" placeholder="Quantidade" min="0.01" required>
             </div>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="products[${productIndex}][notes]" placeholder="Observações">
-            </div>
             <div class="col-md-1">
                 <button type="button" class="btn btn-outline-danger remove-product">
                     <i class="bi bi-trash"></i>
@@ -128,12 +128,15 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 
         container.appendChild(productRow);
-
-        console.log(productsData);
         
         const newSelect = productRow.querySelector('.product-select');
         
         if (newSelect) {
+            // Ensure products are loaded before initializing TomSelect
+            if (productsData.length === 0) {
+                console.warn('Products data not yet loaded. Consider showing a loading indicator.');
+            }
+            
             requestAnimationFrame(() => {
                 try {
                     const tomSelectInstance = new TomSelect(newSelect, {
@@ -141,9 +144,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         labelField: 'name',
                         searchField: 'name',
                         placeholder: 'Selecionar Produto',
-                        options: productsData, // Use pre-loaded data
-                        create: false
+                        options: productsData,
+                        create: false,
+                        // Added configurations for better UX
+                        maxItems: 1,
+                        closeAfterSelect: true,
+                        // Ensure dropdown appears above other elements
+                        dropdownParent: 'body',
+                        render: {
+                            option: function(data, escape) {
+                                return '<div>' + escape(data.name) + '</div>';
+                            },
+                            item: function(data, escape) {
+                                return '<div>' + escape(data.name) + '</div>';
+                            }
+                        }
                     });
+                    
+                    // Store the instance for cleanup
+                    newSelect.tomSelectInstance = tomSelectInstance;
+                    
                 } catch (error) {
                     console.error('Error initializing TomSelect:', error);
                 }
@@ -157,15 +177,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (removeBtn) {
             removeBtn.addEventListener('click', function() {
                 const selectElement = productRow.querySelector('.product-select');
-                if (selectElement && selectElement.tomselect) {
-                    selectElement.tomselect.destroy();
+                // Fixed: Use the stored instance instead of .tomselect
+                if (selectElement && selectElement.tomSelectInstance) {
+                    selectElement.tomSelectInstance.destroy();
                 }
                 productRow.remove();
             });
         }
     });
-
-    $(".ts-dropdown").css("z-index", "9999");
 
 });
                                 </script>
@@ -175,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary w-100 mt-5">Criar</button>
+                <button type="button" class="btn btn-primary w-100 mt-3" id="createServiceBtn">Criar</button>
             </div>
         </div>
     </div>

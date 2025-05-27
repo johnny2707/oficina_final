@@ -21,4 +21,44 @@ class ServicesModel extends Model
 
         return $query->get()->getResultArray();
     }
+
+    public function createService($data) 
+    {
+        $this->db->table($this->table)->insert($data);
+
+        return $this->db->insertID();
+    }
+
+    public function getLastServiceCode() 
+    {
+        $query = $this->db->table($this->table)
+                          ->select('service_code')
+                          ->orderBy('id', 'DESC')
+                          ->limit(1)
+                          ->get();
+
+        if ($query->getNumRows() > 0) {
+            return $query->getRowArray()['service_code'];
+        }
+
+        return null;
+    }
+
+    public function insertProducts($products, $serviceId) 
+    {
+        $data = [];
+        foreach ($products as $product) {
+            $data[] = [
+                'service_id'         => $serviceId,
+                'product_id'         => $product['product_id'],
+                'product_quantity'   => $product['product_quantity']
+            ];
+        }
+
+        if (!empty($data)) {
+            return $this->db->table('tb_service_products')->insertBatch($data);
+        }
+
+        return false;
+    }
 }
