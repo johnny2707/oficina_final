@@ -155,6 +155,14 @@
 							<span class="nav-link-title">PERSONALIZAÇÃO</span>
 						</a>
 					</li>
+					<li class="nav-item dropdown <?= isset($menu) && $menu == 'SAIR' ? 'active' : '' ?>">
+						<a href="<?= base_url('auth/logout') ?>" class="nav-link" >
+							<span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i class="bi bi-door-open-fill"></i>
+							</span>
+							<span class="nav-link-title">SAIR</span>
+						</a>
+					</li>
             	</ul>
           	</div>
 

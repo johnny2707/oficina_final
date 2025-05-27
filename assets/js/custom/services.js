@@ -220,7 +220,6 @@ $(document).ready(function () {
         onChange: () => {
             if($('#selectServiceType').val() != "") {
                 if($('#selectServiceType').val() == "S000001") {
-                    console.log("hello world");
 
                     $("#descricao-li").removeClass("d-none");
                 }
@@ -229,4 +228,5 @@ $(document).ready(function () {
     });
 
     $(".ts-dropdown").css("z-index", "9999");
+    
 });
