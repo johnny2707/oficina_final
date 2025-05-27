@@ -20,11 +20,6 @@
                         <div class="card mb-1">
                             <div class="card-body bg-body-tertiary">
                                 <div class="row">
-                                    <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Código Cliente <sup class="text-danger">*</sup></label></div>
-                                    <div class="col-sm-3"><input type="text" name="clientCode" class="form-control clientCode"></div>
-
-                                    <div class="w-100 d-block mb-3"></div>
-                                
                                     <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Nome <sup class="text-danger">*</sup></label></div>
                                     <div class="col-sm-8"><input type="text" name="clientName" class="form-control clientName"></div>
 
@@ -103,15 +98,15 @@
                                     <div class="w-100 d-block mb-3"></div>
 
                                     <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Email <sup class="text-danger">*</sup></label></div>
-                                    <div class="col-sm-8"><input type="text" name="clientEmail" class="form-control clientEmail"></div>
+                                    <div class="col-sm-8"><input type="text" name="contactEmail" class="form-control contactEmail"></div>
 
                                     <div class="w-100 d-block mb-3"></div>
                                 
-                                    <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Telemóvel <sup class="text-danger">*</sup></label></div>
-                                    <div class="col-sm-3"><input type="tel" name="clientPhoneNumber" pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control clientPhoneNumber"></div>
+                                    <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Telefone <sup class="text-danger">*</sup></label></div>
+                                    <div class="col-sm-3"><input type="tel" name="contactPhoneNumber" pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control contactPhoneNumber"></div>
                                 
-                                    <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Grupo <sup class="text-danger">*</sup></label></div>
-                                    <div class="col-sm-3"><input type="text" name="clientGroup" class="form-control clientGroup"></div>
+                                    <div class="col-sm-2 d-flex align-items-end"><label class="form-label">Telemóvel <sup class="text-danger">*</sup></label></div>
+                                    <div class="col-sm-3"><input type="tel" name="contactMobileNumber" pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control contactMobileNumber"></div>
 
                                     <div class="w-100 d-block mb-3"></div>
                                     

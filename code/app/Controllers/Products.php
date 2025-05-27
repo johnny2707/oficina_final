@@ -45,13 +45,21 @@ class Products extends BaseController
 
     public function createProduct()
     {
-        $productCode = $this->request->getPost('product_code');
-        $productDescription = $this->request->getPost('product_description');
-        $productPrice = $this->request->getPost('product_price');
-        $productUnit = $this->request->getPost('product_unit');
-        $productStock = $this->request->getPost('product_stock');
+        $productCode = $this->request->getPost('productCode');
+        $productDescription = $this->request->getPost('productDescription');
+        $productPrice = $this->request->getPost('productPrice');
+        $productUnit = $this->request->getPost('productUnit');
+        $productStock = $this->request->getPost('productStock');
 
-        $this->res['popUpMessages'][] = $this->productsModel->createProduct($productCode, $productDescription, $productPrice, $productUnit, $productStock);
+        $productData = [
+            'product_code' => $productCode,
+            'product_description' => $productDescription,
+            'product_price' => $productPrice,
+            'product_unit_id' => $productUnit,
+            'product_stock' => $productStock
+        ];
+
+        $this->res['popUpMessages'][] = $this->productsModel->createProduct($productData);
 
         return $this->response->setJSON($this->res);
     }
@@ -93,5 +101,12 @@ class Products extends BaseController
         }
 
         return $this->response->setJSON($dataTableData);
+    }
+
+    public function getAllUnits()
+    {
+        $units = $this->productsModel->getAllUnits();
+
+        return $this->response->setJSON($units);
     }
 }

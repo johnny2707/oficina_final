@@ -6,7 +6,7 @@ class ProductsModel extends Model
 {
     protected $db;
 
-    protected $table = 'tb_services';
+    protected $table = 'tb_products';
     protected $useSoftDeletes = true;
 
     public function __construct() 
@@ -40,5 +40,12 @@ class ProductsModel extends Model
     public function createProduct($data)
     {
         $this->db->table('tb_products')->insert($data);
+    }
+
+    public function getAllUnits()
+    {
+        $query = $this->db->table('tb_units')->select('unit_id, unit_code')->get();
+        
+        return $query->getResultArray();
     }
 }

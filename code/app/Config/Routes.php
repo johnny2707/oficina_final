@@ -26,7 +26,7 @@ $routes->group('stock', ['filter' => 'authGuard|permissionsValidation:STOCK, ALL
     $routes->post('getProduct',           'Products::getProduct');
     $routes->get('populateProductsTable', 'Products::populateProductsTable');
     $routes->get('criarProduto',          'Products::createProductPage');
-    $routes->post('criarProduto',          'Products::createProduct');
+    $routes->post('criarProduto',         'Products::createProduct');
 });
 
 // AUTHENTICATION
@@ -49,6 +49,7 @@ $routes->get('/auth/logout',                           'Auth::logout', ['filter'
 $routes->group('products', ['filter' => 'authGuard|permissionsValidation: PRODUCTS, ALL'], function($routes){
     $routes->post('getProductByCode', 'Products::getProductByCode');
     $routes->get('getAllProducts',    'Products::getAllProducts');
+    $routes->get('getAllUnits',       'Products::getAllUnits');
 });
 
 //CLIENTS
@@ -61,6 +62,8 @@ $routes->group('clients', ['filter' => 'authGuard|permissionsValidation:CLIENTS,
     $routes->get('getAllClients',         'Clients::getAllClients');
     $routes->post('getClientInfoByCode',  'Clients::getClientInfoByCode');
     $routes->post('getVehiclesByCode',    'Clients::getClientVehicles');
+    $routes->post('deleteClient',         'Clients::deleteClient');
+    $routes->post('updateClient',         'Clients::updateClient');
 });
 
 //VEHICLES
@@ -119,4 +122,6 @@ $routes->get('clock', 'Clock::index');
 $routes->group('services', ['filter' => 'authGuard|permissionsValidation: SERVICES, ALL'], function($routes){
     $routes->get('index',          'Services::index');
     $routes->get('getAllServices', 'Services::getAllServices');
+    $routes->get('create',         'Services::createServicePage');
+    $routes->post('createService', 'Services::createService');
 });

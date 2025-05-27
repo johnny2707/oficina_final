@@ -47,4 +47,12 @@ class Services extends BaseController
 
         return $this->response->setJSON($services);
     }
+
+    public function createServicePage() 
+    {
+        $this->data['title'] = 'Criar Serviço';
+        $this->data['menu'] = 'SERVICES';
+
+        return view('html/services/create', $this->data);
+    }
 }

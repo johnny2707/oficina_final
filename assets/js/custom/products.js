@@ -39,30 +39,39 @@ $(document).ready(function () {
     });
 
 
-    $('#createProductForm').on('submit', function (e) {
-        e.preventDefault();
+    $(document).on('click', '.createProductButton', function (e) {
+
+        console.log($('#productCode').val());
+        console.log($('#productDescription').val());
+        console.log($('#productPrice').val());
+        console.log($('#selectUnit').val());
+        console.log($('#productStock').val());
 
         var formData = {
             productCode: $('#productCode').val(),
             productDescription: $('#productDescription').val(),
             productPrice: $('#productPrice').val(),
-            productUnit: $('#productUnit').val(),
+            productUnit: $('#selectUnit').val(),
             productStock: $('#productStock').val()
         };
 
+        if( !formData.productCode || !formData.productDescription || !formData.productPrice || !formData.productUnit || !formData.productStock) {
+            notyf.error('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
         $.ajax({
             type: 'POST',
-            url: `${baseURL}products/criarProduto`,
+            url: `${baseURL}stock/criarProduto`,
             data: formData,
             dataType: 'json',
             success: function (response) {
                 if (response.error) {
                     response.messages.forEach(function (message) {
-                        alert(message); // You can replace this with a more user-friendly notification
+                        notyf.error(message); // You can replace this with a more user-friendly notification
                     });
                 } else {
-                    alert('Produto criado com sucesso!');
-                    productsTable.ajax.reload(); // Reload the table data
+                    notyf.success('Produto criado com sucesso!');
                     $('#createProductForm')[0].reset(); // Reset the form
                 }
             },
@@ -75,70 +84,40 @@ $(document).ready(function () {
     });
 
 
-    // let productOptions = [];
+    let unitsOptions = [];
 
-    // let selectProduct = new TomSelect('#selectProduct', {
-    //     options: [],
-    //     maxItems: 1, 
-    //     dropdownClass: 'dropdown-menu ts-dropdown',
-    //     optionClass: 'dropdown-item',
-    //     dropdownParent: 'body',
-    //     onInitialize: () => {
-    //         $.ajax({
-    //             type: "get",
-    //             url: `${baseURL}stock/getAllProducts`,
-    //             success: function (data) {
-    //                 if (data.length === 0) {
-    //                     productOptions.push({value: 0, text: "no items found"})
-    //                 } 
-    //                 else {
-    //                     data.forEach(element => {
+    let selectUnit = new TomSelect('#selectUnit', {
+        options: [],
+        onInitialize: () =>{
+            $.ajax({
+                type: "get",
+                url: `${baseURL}products/getAllUnits`,
+                success: function (data) {
+                    if (data.length === 0) {
+                        unitsOptions.push({value: 0, text: "no items found"})
+                    } 
+                    else {
+                        data.forEach(element => {
         
-    //                         var newItem = {value: element.product_id, text: element.product_description}
-    //                         productOptions.push(newItem);
-    //                     });
+                            var newItem = {value: element.unit_id, text: element.unit_code}
+                            unitsOptions.push(newItem);
+                        });
 
-    //                     console.log(productOptions)
-    //                     selectProduct.addOptions(productOptions)
-    //                     selectProduct.sync();
-    //                 }
-    //             },
-    //             error: function(xhr, status, error) {
-    //                 console.log(xhr);
-    //                 console.log(status);
-    //                 console.log(error);
-    //             }
-    //         });
-    //     },
-    //     onChange: () => {
-    //         let selectedProduct = selectProduct.getValue();
-    //         console.log(selectedProduct);
-
-    //         $.ajax({
-    //             type: "post",
-    //             url: `${baseURL}stock/getProduct`,
-    //             data: {
-    //                 product_id: selectedProduct
-    //             },
-    //             dataType: "json",
-    //             success: function (response) {
-    //                 if(response.error == true) {
-    //                     response.popUpMessages.forEach(element => {
-    //                         notyf.error(element);
-    //                     });
-    //                 }
-    //                 else {
-    //                     console.log(response.product);
-    //                 }
-    //             },
-    //             error: function(xhr, status, error) {
-    //                 console.log(xhr);
-    //                 console.log(status);
-    //                 console.log(error);
-    //             }
-    //         });
-
-    //     }
-    // });
+                        console.log(unitsOptions)
+                        selectUnit.addOptions(unitsOptions)
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr)
+                    console.log(status)
+                    console.log(error)
+                }
+            });
+        },
+        maxItems: 1, 
+        dropdownClass: 'dropdown-menu ts-dropdown',
+        optionClass: 'dropdown-item',
+        dropdownParent: 'body'
+    });
 
 });
