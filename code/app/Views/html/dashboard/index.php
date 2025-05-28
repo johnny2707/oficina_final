@@ -6,21 +6,21 @@
     <div class="container-xl">
         <div class="row">
             <div class="col-md-12 row">
-                <div id="" class="col-sm-12 col-md-8">
+                <div id="" class="col-sm-12 col-md-8 p-3">
                     <div class="card rounded-3 p-3">
+
                         <h3 class="text-dark mb-3">Vehicle Work Queue</h3>
                         
                         <!-- Vehicle Selection List -->
                         <div id="vehicle-list" class="vehicle-selection">
                             <?php if (isset($vehicles) && !empty($vehicles)): ?>
                                 <?php foreach ($vehicles as $vehicle): ?>
-                                    <div class="card mb-3 vehicle-card" data-vehicle-id="<?= $vehicle['id'] ?>" style="cursor: pointer;">
+                                    <div class="card mb-3 vehicle-card" data-vehicle-id="<?= $vehicle['vehicle_id'] ?>" style="cursor: pointer;">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <h5 class="card-title mb-1"><?= esc($vehicle['make']) ?> <?= esc($vehicle['model']) ?></h5>
-                                                    <p class="card-text text-muted mb-1">License: <?= esc($vehicle['license_plate']) ?></p>
-                                                    <small class="text-muted">Customer: <?= esc($vehicle['customer_name']) ?></small>
+                                                    <h5 class="card-title mb-1"><?= esc($vehicle['vehicle_brand']) ?> <?= esc($vehicle['vehicle_model']) ?></h5>
+                                                    <p class="card-text text-muted mb-1">License: <?= esc($vehicle['vehicle_license_plate']) ?></p>
                                                 </div>
                                                 <span class="badge bg-warning">Pending</span>
                                             </div>
@@ -88,7 +88,8 @@
                         
                         vehicleCards.forEach(card => {
                             card.addEventListener('click', function() {
-                                const vehicleId = this.dataset.vehicleId;
+                                const vehicleId = this.getAttribute('data-vehicle-id');
+                                console.log('Selected Vehicle ID:', vehicleId);
                                 selectVehicle(vehicleId);
                             });
                         });
@@ -96,7 +97,7 @@
 
                     function selectVehicle(vehicleId) {
                         // Update vehicle status to working
-                        fetch('/dashboard/start-work', {
+                        fetch('/services/start-work', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -193,6 +194,7 @@
                     }
                     </script>
                 </div>
+
                 <div id="schedule" class="col-sm-12 col-md-4 p-3">
                     <div class="card rounded-3 p-3">
                         <h3 class="text-dark mb-3">Low Stock Products</h3>

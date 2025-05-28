@@ -119,7 +119,7 @@
 						</a>
 						<div class="dropdown-menu">
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CALENDAR' ? 'active' : '' ?>" href="<?= base_url('calendar/index') ?>">CALENDÁRIO</a>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'LIST' ? 'active' : '' ?>" href="<?= base_url('calendar/list') ?>">LISTA DE EVENTOS</a>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'NEW' ? 'active' : '' ?>" href="<?= base_url('calendar/create') ?>">CRIAR EVENTO</a>
 						</div>
 					</li>
 					<?php endif; ?>
@@ -133,7 +133,7 @@
 						</a>
 						<div class="dropdown-menu">
 								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'CREATION' ? 'active' : '' ?>" href="<?= base_url('services/create') ?>">CRIAR SERVIÇO</a>
-								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'INTERVENTION' ? 'active' : '' ?>" href="<?= base_url('services/index') ?>">NOVA INTERVENÇÃO</a>
+								<a class="dropdown-item <?= isset($subMenu) && $subMenu == 'LIST' ? 'active' : '' ?>" href="<?= base_url('services/index') ?>">LISTA SERVIÇOS</a>
 						</div>
 					</li>
 					<?php endif; ?>

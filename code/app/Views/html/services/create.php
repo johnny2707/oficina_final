@@ -26,14 +26,14 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name" class="form-label">Nome do Serviço</label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <input type="text" class="form-control" id="service_name" name="name" required>
                                     </div>
                                     
                                     <div class="col-md-6 mb-3">
                                         <label for="price" class="form-label">Preço</label>
                                         <div class="input-group">
                                             <span class="input-group-text">€</span>
-                                            <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+                                            <input type="number" step="0.01" class="form-control" id="service_price" name="price" required>
                                         </div>
                                     </div>
                                 </div>
@@ -41,19 +41,19 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="description" class="form-label">Descrição</label>
-                                        <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                                        <textarea class="form-control" id="service_description" name="service_description" rows="4"></textarea>
                                     </div>
                                 </div>
                                 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="duration" class="form-label">Duração (minutos)</label>
-                                        <input type="number" class="form-control" id="duration" name="duration">
+                                        <input type="number" class="form-control" id="service_duration" name="duration">
                                     </div>
                                     
                                     <div class="col-md-6 mb-3">
                                         <label for="status" class="form-label">Estado</label>
-                                        <select class="form-select" id="status" name="status">
+                                        <select class="form-select" id="service_status" name="status">
                                             <option value="1">Ativo</option>
                                             <option value="0">Inativo</option>
                                         </select>
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </select>
             </div>
             <div class="col-md-3">
-                <input type="number" step="0.01" class="form-control" name="products[${productIndex}][quantity]" placeholder="Quantidade" min="0.01" required>
+                <input type="number" step="0.01" class="form-control product-quantity" name="products[${productIndex}][product_quantity]" placeholder="Quantidade" min="0.01" required>
             </div>
             <div class="col-md-1">
                 <button type="button" class="btn btn-outline-danger remove-product">
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary w-100 mt-3" id="createServiceBtn">Criar</button>
+                <button type="button" class="btn btn-primary w-100 mt-3 createServiceBtn" id="createServiceBtn">Criar</button>
             </div>
         </div>
     </div>

@@ -36,20 +36,13 @@ class EventsModel extends Model
         $query = $this->db->table('tb_events')->select('*');
 
         return $query->get();
-    }   
-
-    public function getAllTypes()
-    {
-        $query = $this->db->table('tb_events_types')->select('*');
-
-        return $query->get()->getResultArray();
     }
 
     public function getAllEventsByDateRange($start, $end)
     {
         $query = $this->db->table('tb_events')->select('*')
-                                              ->join('tb_events_types', 'tb_events.event_type = tb_events_types.type_id')
                                               ->join('tb_clients_vehicles', 'tb_events.event_vehicle_license_plate = tb_clients_vehicles.vehicle_license_plate')
+                                              ->join('tb_services', 'tb_events.event_service_id = tb_services.service_id')
                                               ->where("tb_events.event_date >= ", $start)
                                               ->where("tb_events.event_date <=", $end);            
         
@@ -59,7 +52,6 @@ class EventsModel extends Model
     public function getEventDataById($eventId)
     {
         $query = $this->db->table($this->table)->select('*')
-                                               ->join('tb_events_types', 'tb_events.event_type = tb_events_types.id')
                                                ->join('tb_clients_vehicles', 'tb_events.event_vehicle_license_plate = tb_clients_vehicles.vehicle_license_plate')
                                                ->where("tb_events.event_id >= ", $eventId);
                                                
@@ -70,10 +62,47 @@ class EventsModel extends Model
     public function getDailyEventInfo()
     {
         $today = Time::now()->format('Y-m-d');
-        $query = $this->db->table('tb_events')->select('event_id, event_date, event_vehicle_license_plate')
+        $query = $this->db->table('tb_events')->select('*')
+                                              ->join('tb_clients_vehicles', 'tb_events.event_vehicle_license_plate = tb_clients_vehicles.vehicle_license_plate')
                                               ->where("DATE(event_date) =", $today)
-                                              ->get();
+                                              ->get()->getResultArray();
         
-        return $query->getResultArray();
+        return $query;
+    }
+
+    public function getEventData($event_id)
+    {
+        $query = $this->db->table('tb_events')->select('*')
+                                               ->join('tb_clients_vehicles', 'tb_events.event_vehicle_license_plate = tb_clients_vehicles.vehicle_license_plate')
+                                               ->join('tb_services', 'tb_events.event_service_id = tb_services.service_id')
+                                               ->join('tb_clients', 'tb_clients_vehicles.vehicle_third_party_code = tb_clients.client_code')
+                                               ->where("tb_events.event_id", $event_id)
+                                               ->get()
+                                               ->getResultArray();
+        
+        $service_id = $query[0]['service_id'];
+        
+        $query2 = $this->db->table('tb_products')->select('*')
+                                               ->join('tb_services_products', 'tb_products.product_id = tb_services_products.product_id')
+                                               ->where("tb_services_products.service_id", $service_id)
+                                               ->get()
+                                               ->getResultArray();
+
+        $data = [
+            'event' => $query,
+            'products' => $query2
+        ];                                       
+
+        return $data;
+    }
+
+    public function changeProgress($data)
+    {
+        $eventId = $data['event_id'];
+        $progress = $data['event_status'];
+
+        $this->db->table('tb_events')->set('event_status', $progress)
+                                     ->where('event_id', $eventId)
+                                     ->update();
     }
 }

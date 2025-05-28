@@ -13,10 +13,10 @@ $routes->get('/', 'Dashboard::index', ['filter' => 'authGuard']);
 
 //FATURA
 
-$routes->group('fatura', ['filter' => 'authGuard|permissionsValidation:FATURAS, ALL'], function($routes){
-    $routes->get('faturaDireta',  'Fatura::faturaDireta');
-    $routes->get('fatura',        'Fatura::fatura');
-});
+// $routes->group('fatura', ['filter' => 'authGuard|permissionsValidation:FATURAS, ALL'], function($routes){
+//     $routes->get('faturaDireta',  'Fatura::faturaDireta');
+//     $routes->get('fatura',        'Fatura::fatura');
+// });
 
 //STOCK
 
@@ -96,6 +96,8 @@ $routes->group('calendar', ['filter' => 'authGuard|permissionsValidation: EVENTS
     $routes->post('events',             'Events::listOfEvents');
     $routes->get('create',              'Events::createEventLoadPage');
     $routes->post('create',             'Events::createEvent');
+    $routes->get('(:num)',              'Events::intervention/$1');
+    $routes->post('changeProgress',     'Events::changeProgress');
 });
 
 //USERS
@@ -120,8 +122,21 @@ $routes->get('clock', 'Clock::index');
 
 // SERVICES
 $routes->group('services', ['filter' => 'authGuard|permissionsValidation: SERVICES, ALL'], function($routes){
-    $routes->get('index',          'Services::index');
-    $routes->get('getAllServices', 'Services::getAllServices');
-    $routes->get('create',         'Services::createServicePage');
-    $routes->post('createService', 'Services::createService');
+    $routes->get('index',                   'Services::index');
+    $routes->get('getAllServices',          'Services::getAllServices');
+    $routes->get('create',                  'Services::createServicePage');
+    $routes->post('createService',          'Services::createService');
+    $routes->post('start-work',             'Services::startWork');
+    $routes->post('end-work',               'Services::endWork');
+    $routes->get('populateServicesTable',   'Services::populateServicesTable');
+});
+
+
+// PERSONALIZATION
+
+$routes->group('personalization', ['filter' => 'authGuard|permissionsValidation: PERSONALIZATION, ALL'], function($routes){
+    $routes->get('index',                   'Personalization::index');
+    $routes->post('createPersonalization',  'Personalization::createPersonalization');
+    $routes->post('deletePersonalization',  'Personalization::deletePersonalization');
+    $routes->post('updatePersonalization',  'Personalization::updatePersonalization');
 });

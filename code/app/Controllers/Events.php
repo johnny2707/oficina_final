@@ -150,102 +150,38 @@ class Events extends BaseController
             
             foreach ($allInterventions->getResultArray() as $interventions) 
             {
-
-                // // Get the list of technicians associated to the intervention
-                // $technicians = array();
-                // $techniciansData = $this->eventsModel->getTechniciansByInterventionID($interventions['id']);
-                // foreach ($techniciansData->getResultArray() as $techs) {
-                //     array_push($technicians, array(
-                //         "id"    => $techs['userID'],
-                //         "name"  => $techs['userName'],
-                //         "color" => $techs['userColor']
-                //     ));
-                // }
-
-                // // Assign the intervention color
-                // $color = isset($technicians[0]['color']) ? $technicians[0]['color'] : "#FFFFF"; // Assign the first technician color
-                // $techniciansNamesList = implode(", ", array_column($technicians, 'name'));
-                // foreach ($technicians as $techs) {
-                //     if ($techs['id'] == session()->get('id')) { // Assign the current user color if is associated to the intervention
-                //         $color = $techs['color'];
-                //         break;
-                //     }
-                // }
+                if($interventions['event_status'] == 0)
+                {
+                    $color = "#00FF00";
+                }
+                elseif($interventions['event_status'] == 1)
+                {
+                    $color = "#0000FF";
+                }
+                elseif($interventions['event_status'] == 2)
+                {
+                    $color = "#FF0000";
+                }
+                else
+                {
+                    $color = "#808080";
+                }
 
                 // Add data to the events array
                 array_push($events, array(
                     'id'    => $interventions['event_id'],
-                    'title' => $interventions['event_description'],
+                    'title' => $interventions['service_name'],
                     'description' => "
-                        <b>" . $interventions['event_description'] . "</b>
+                        <b>" . $interventions['service_name'] . "</b>
                         <br><br>
                         <b><u>Descrição:</u></b><br>
-                        " . $interventions['event_description'],
+                        " . $interventions['service_description'] ,
                     'start' => $interventions['event_date'] . "T" . $interventions['event_start'],
                     'end'   => $interventions['event_date'] . "T" . $interventions['event_end'],
-                    'color' => (strtotime(date('Y-m-d H:i:s')) > strtotime($interventions['event_date']. ' ' .$interventions['event_end']) ? '#FF000090' : '#FF0000'),
-                    'url'   => base_url("events/{$interventions['event_id']}/update")
+                    'color' => (strtotime(date('Y-m-d H:i:s')) > strtotime($interventions['event_date']. ' ' .$interventions['event_end']) ? $color . '90' : $color),
+                    'url'   => base_url("calendar/{$interventions['event_id']}")
                 ));
             }
-
-            // // ADD APPOINTMENTS
-            // $allAppointments = $this->appointmentsModel->getAllAppointmentsByDateRange(date("Y-m-d", strtotime($formData['start'])), date("Y-m-d", strtotime($formData['end'])));
-            // foreach ($allAppointments->getResultArray() as $appointments) {
-
-            //     // Get the list of technicians associated to the appointment
-            //     $technicians = array();
-            //     $techniciansData = $this->appointmentsModel->getTechniciansByAppointmentID($appointments['id']);
-            //     foreach ($techniciansData->getResultArray() as $techs) {
-            //         array_push($technicians, array(
-            //             "id"    => $techs['userID'],
-            //             "name"  => $techs['userName'],
-            //             "color" => $techs['userColor']
-            //         ));
-            //     }
-
-            //     // Assign the appointment color
-            //     $color = $technicians[0]['color']; // Assign the first technician color
-            //     $techniciansNamesList = implode(", ", array_column($technicians, 'name'));
-            //     foreach ($technicians as $techs) {
-            //         if ($techs['id'] == session()->get('id')) { // Assign the current user color if is associated to the appointment
-            //             $color = $techs['color'];
-            //             break;;
-            //         }
-            //     }
-
-            //     // Add data to the events array
-            //     array_push($events, array(
-            //         'id'    => $appointments['id'],
-            //         'title' => "{$appointments['customerName']} (Marcação {$this->appointments->dataConst['type'][$appointments['type']]})",
-            //         'description' => "
-            //             <b>{$appointments['customerName']} (Marcação {$this->appointments->dataConst['type'][$appointments['type']]})</b>
-            //             <br><br>
-            //             <b><u>Técnicos:</u></b><br>
-            //             {$techniciansNamesList}
-            //             <br><br>
-            //             <b><u>Descrição:</u></b><br>
-            //             {$appointments['description']}
-            //         ",
-            //         'start' => "{$appointments['date']}T{$appointments['start']}",
-            //         'end'   => "{$appointments['date']}T{$appointments['end']}",
-            //         'color' => $color . ($appointments['status'] != 1 ? '80' : ''),
-            //         'url'   => base_url("appointments/{$appointments['id']}/update")
-            //     ));
-            // }
-
-            // // ADD VACATIONS
-            // $allVacations = $this->vacationsModel->getAllVacationsByDateRange(date("Y-m-d", strtotime($formData['start'])), date("Y-m-d", strtotime($formData['end'])));
-            // foreach ($allVacations->getResultArray() as $vacations) {
-
-            //     // Add data to the events array
-            //     array_push($events, array(
-            //         'id'    => $vacations['id'],
-            //         'title' => "Férias {$vacations['userName']}",
-            //         'description' => "<b>Férias</b> {$vacations['userName']}",
-            //         'start' => $vacations['date'],
-            //         'color' => "#cfb734"
-            //     ));
-            // }
 
             // ADD PUBLIC HOLIDAYS
             $publicHolidays = publicHolidaysByYear($formData['currentYear']);
@@ -274,5 +210,48 @@ class Events extends BaseController
         $this->data['eventInfo'] = $this->eventsModel->getEventDataById($eventId);
 
         return view('html/events/eventUpdation', $this->data);
+    }
+
+    public function intervention($event_id) 
+    {
+        $this->data['title'] = "INTERVENTION";
+        $this->data['data'] = $this->eventsModel->getEventData($event_id);
+
+        return view('html/events/intervention', $this->data);
+    }
+
+    public function changeProgress()
+    {
+        $input = $this->request->getJSON(true); // true converts to array
+        $eventId = $input['event_id'] ?? null;
+        $progress = $input['progress'] ?? null;
+
+        $data = [
+            'event_id' => $eventId,
+            'event_status' => $progress
+        ];
+
+        $result = $this->eventsModel->changeProgress($data);
+        
+        if($result)
+        {
+            $this->logsModel->log([
+                'log_third_party_id' => $this->session->get('id'),
+                'log_type' => 'event progress change',
+                'log_description' => "User changed the progress of event {$eventId} to {$progress}",
+                'log_date' => date('Y-m-d H:i:s')
+            ]);
+            
+            array_push($this->res['popUpMessages'], ["Progress updated successfully!"]);
+        }
+        else
+        {
+            $this->res['error'] = TRUE;
+            array_push($this->res['popUpMessages'], ["Failed to update progress!"]);
+        }
+
+        $this->res['data-received'] = $data;
+
+        return $this->response->setJSON($this->res);
     }
 }

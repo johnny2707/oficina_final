@@ -26,7 +26,7 @@ class Dashboard extends BaseController
         $this->data['title'] = "DASHBOARD";
 
         $this->data['lowStockProducts'] = $this->productsModel->getLowStockProducts($this->lowStockThreshold);
-        $this->data['events'] = $this->eventsModel->getDailyEventInfo();
+        $this->data['vehicles'] = $this->eventsModel->getDailyEventInfo();
 
         return view('html/dashboard/index', $this->data);
     }

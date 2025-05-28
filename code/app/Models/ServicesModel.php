@@ -22,6 +22,13 @@ class ServicesModel extends Model
         return $query->get()->getResultArray();
     }
 
+    public function getAllActiveServices() 
+    {
+        $query = $this->db->table('tb_services')->select('*')->where('service_status', 1);
+
+        return $query->get()->getResultArray();
+    }
+
     public function createService($data) 
     {
         $this->db->table($this->table)->insert($data);
@@ -33,7 +40,7 @@ class ServicesModel extends Model
     {
         $query = $this->db->table($this->table)
                           ->select('service_code')
-                          ->orderBy('id', 'DESC')
+                          ->orderBy('service_id', 'DESC')
                           ->limit(1)
                           ->get();
 
@@ -56,7 +63,7 @@ class ServicesModel extends Model
         }
 
         if (!empty($data)) {
-            return $this->db->table('tb_service_products')->insertBatch($data);
+            return $this->db->table('tb_services_products')->insertBatch($data);
         }
 
         return false;
