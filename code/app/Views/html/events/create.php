@@ -26,12 +26,6 @@
                                         <input type="text" id="selectVehicle" name="vehicleLicensePlate" class="form-control">
                                     </div>
                                     
-                                    <div class="col-sm-2 d-flex align-items-end">
-                                        <label class="form-label">Mecânico</label>
-                                    </div>
-                                    <div class="col-sm-4 d-flex align-items-end">
-                                        <input type="text" id="selectMechanic" name="mechanicNumber" class="form-control">
-                                    </div>
 
                                     <div class="w-100 d-block mb-3"></div>
 
@@ -58,13 +52,11 @@
                                         <input type="time" id="eventStart" name="eventStart" class="form-control">
                                     </div>
 
-                                    <div class="w-100 d-block mb-3"></div>
-
                                     <div class="col-sm-2 d-flex align-items-end">
-                                        <label class="form-label">Descrição</label>
+                                        <label class="form-label">Hora prevista de conclusão</label>
                                     </div>
-                                    <div class="col-sm-10 d-flex align-items-end">
-                                        <input type="text" id="eventDescription" name="eventDescription" class="form-control">
+                                    <div class="col-sm-4 d-flex align-items-end">
+                                        <input type="time" id="eventEnd" name="eventEnd" class="form-control">
                                     </div>
 
                                     <div class="w-100 d-block mb-3"></div>

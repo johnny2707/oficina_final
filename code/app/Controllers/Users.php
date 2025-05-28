@@ -70,8 +70,8 @@ class Users extends BaseController
                 $userData = array(
                     'user_id'                => $userID,
                     'user_third_party_code'  => $tokenInfo[0]['token_third_party_id'],
-                    'user_name'              => $clientInfo[0]['client_name'],
-                    'user_email'             => $clientInfo[0]['contact_email'],
+                    'user_name'              => $clientInfo['client']['client_name'],
+                    'user_email'             => $clientInfo['contacts'][0]['contact_email'],
                     'user_password'          => password_hash($password, PASSWORD_DEFAULT),
                     'user_group_id'          => 2,
                 );

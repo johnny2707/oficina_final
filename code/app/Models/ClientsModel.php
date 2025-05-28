@@ -83,7 +83,7 @@ class ClientsModel extends Model
     {
         // Fetch the main client information
         $clientQuery = $this->db->table($this->table)
-                                ->where("{$this->table}.client_code", $clientCode)
+                                ->where("client_code", $clientCode)
                                 ->get();
 
         $clientData = $clientQuery->getRowArray(); // Get the main client as a single row

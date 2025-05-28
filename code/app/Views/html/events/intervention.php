@@ -86,7 +86,7 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <label class="form-label">Matrícula</label>
-                                        <input type="text" class="form-control" value="<?= $data['event'][0]['vehicle_license_plate'] ?? '' ?>">
+                                        <input type="text" class="form-control vehicle" value="<?= $data['event'][0]['vehicle_license_plate'] ?? '' ?>">
                                     </div>
 
                                     <div class="col-md-6">
@@ -302,6 +302,7 @@
                                         <label class="form-label">Quantidade</label>
                                         <input type="number" class="form-control" id="new_product_quantity" placeholder="1">
                                     </div>
+                                        <input type="hidden" class="form-control" id="new_product_stock">
                                     <div class="col-md-2">
                                         <label class="form-label">&nbsp;</label>
                                         <button type="button" class="btn btn-primary w-100" onclick="addProduct()">Adicionar Produto</button>
@@ -356,6 +357,7 @@
                                 function addProduct() {
                                     const code = document.getElementById('new_product_code').value;
                                     const description = document.getElementById('new_product_description').value;
+                                    const stock = document.getElementById('new_product_stock').value;
                                     const price = document.getElementById('new_product_price').value;
                                     const quantity = document.getElementById('new_product_quantity').value;
                                     
@@ -371,7 +373,7 @@
                                         <td>${description}</td>
                                         <td>${parseFloat(price).toFixed(2)}</td>
                                         <td>${quantity}</td>
-                                        <td>-</td>
+                                        <td>${stock}</td>
                                         <td>${(parseFloat(price) * parseInt(quantity)).toFixed(2)}</td>
                                     `;
                                     
@@ -407,6 +409,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <button class="btn btn-primary mt-3 w-100 guardarInterventionBtn">Guardar</button>
 
                 </div>
             </div>

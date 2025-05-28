@@ -24,7 +24,9 @@ class ProductsModel extends Model
 
     public function getProductByCode($productCode)
     {
-        $query = $this->db->table('tb_services')->select('service_code, service_description, unit_code, service_price_without_iva')->join('tb_units', 'service_unit_id = unit_id')->where('service_code', $productCode);
+        $query = $this->db->table('tb_products')->select('*')
+                                                ->join('tb_units', 'product_unit_id = unit_id')
+                                                ->where('product_code', $productCode);
     
         return $query->get()->getResultArray();
     }

@@ -107,9 +107,9 @@ $(document).ready(function () {
                     $.each(data.popUpMessages, function(key, value) {
                         notyf.success(value);
                     });
-                }
 
-                location.reload();
+                    location.reload();
+                }
             },
             error: function(xhr, status, error){
                 console.log(xhr);

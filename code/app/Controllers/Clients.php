@@ -124,10 +124,6 @@ class Clients extends BaseController
                 'label'   => 'Email', 
                 'rules'   => 'required|valid_email'
             ],
-            'contact.contactPhoneNumber' => [
-                'label'         => 'Telefone', 
-                'rules'         => 'required'
-            ],
             'contact.contactMobileNumber' => [
                 'label'   => 'Telemóvel',
                 'rules'   => 'required'

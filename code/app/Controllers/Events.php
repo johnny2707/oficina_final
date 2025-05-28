@@ -65,7 +65,6 @@ class Events extends BaseController
         $validationRules = array(
             'event_type'                      => ['rules' => 'required'],
             'event_vehicle_license_plate'     => ['rules' => 'required'],
-            'event_description'               => ['rules' => 'required'],
             'event_date'                      => ['rules' => 'required'],
             'event_start'                     => ['rules' => 'required'],
             'event_end'                       => ['rules' => 'required']
@@ -77,13 +76,12 @@ class Events extends BaseController
         }
 
         $eventData = [
-            'event_type'                  => $this->request->getPost('event_type'),
+            'event_service_id'            => $this->request->getPost('event_type'),
             'event_vehicle_license_plate' => $this->request->getPost('event_vehicle_license_plate'),
-            'event_description'           => $this->request->getPost('event_description'),
             'event_date'                  => $this->request->getPost('event_date'),
             'event_start'                 => $this->request->getPost('event_start'),
             'event_end'                   => $this->request->getPost('event_end'),
-            'event_mechanic_id'           => $this->request->getPost('event_mechanic_id'),
+            'event_observations'          => $this->request->getPost('event_observations'), 
         ];
 
         $result = $this->eventsModel->createEvent($eventData);
@@ -178,7 +176,7 @@ class Events extends BaseController
                         " . $interventions['service_description'] ,
                     'start' => $interventions['event_date'] . "T" . $interventions['event_start'],
                     'end'   => $interventions['event_date'] . "T" . $interventions['event_end'],
-                    'color' => (strtotime(date('Y-m-d H:i:s')) > strtotime($interventions['event_date']. ' ' .$interventions['event_end']) ? $color . '90' : $color),
+                    'color' => ($color),
                     'url'   => base_url("calendar/{$interventions['event_id']}")
                 ));
             }

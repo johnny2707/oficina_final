@@ -68,7 +68,7 @@ $routes->group('clients', ['filter' => 'authGuard|permissionsValidation:CLIENTS,
 
 //VEHICLES
 
-$routes->group('vehicles', ['filter' => 'authGuard|permissionsValidation: VEHICLES, ALL'], function($routes){
+$routes->group('vehicles', ['filter' => 'authGuard|permissionsValidation: VEHICLE, ALL'], function($routes){
     $routes->get('myVehicle',                               'Vehicles::index');
     $routes->get('historic',                                'Vehicles::historicPage');
     $routes->get('getUserVehicles',                         'Vehicles::getUserVehicles');
